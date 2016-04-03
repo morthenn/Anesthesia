@@ -19,21 +19,23 @@ public class MainControl {
     private static final String CREATE_TABLE_QUERY = "CREATE TABLE"
 	    + " if not exists test3"
 	    + "(EVIDENCIAL_NUMBER INTEGER PRIMARY KEY AUTOINCREMENT,"
-	    + "REGISTERED_DATE NUMERIC,"
+	    + "REGISTERED_DATE DATE,"
 	    + "AGE INTEGER,"
 	    + "ASA_CODE TEXT,"
 	    + "TREATMENT_TYPE TEXT,"
 	    + "ANESTHESIA_TECHNIQUE TEXT,"
 	    + "SUPERVISION_TYPE TEXT)";
-    
+
     // Driver
     private static final String DRIVER = "org.sqlite.JDBC";
     private static final String DB_URL = "jdbc:sqlite:anesthesia.db";
-    
-    protected Connection conn;
+
+    Connection conn;
     private Statement stat;
 
-    public MainControl() {
+	//constructor
+
+    MainControl() {
 
 	try {
 	    Class.forName(MainControl.DRIVER);
@@ -52,15 +54,14 @@ public class MainControl {
 	createTable();
     }
 
+	//methods
     /**
-     * Creates table if it dont exist
+     * Creates table if it don't exist
      */
 
-    public boolean createTable() {
-	String createTable = CREATE_TABLE_QUERY;
-
+    private boolean createTable() {
 	try {
-	    stat.execute(createTable);
+	    stat.execute(CREATE_TABLE_QUERY);
 	} catch (SQLException e) {
 	    System.err.println("Blad przy tworzeniu tabeli");
 	    e.printStackTrace();
@@ -68,7 +69,7 @@ public class MainControl {
 	}
 	return true;
     }
-    
+
     /**
      * Show list of every registered patient in database
      */
@@ -98,4 +99,6 @@ public class MainControl {
 	}
 	return patients;
     }
+
+
 }

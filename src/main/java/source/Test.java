@@ -1,34 +1,30 @@
 package source;
 
 import java.util.List;
+import java.util.Random;
 
 import org.joda.time.DateTime;
-
-import controller.MainControl;
 import controller.PatientControl;
+import types.AnesthesiaTechnique;
+import types.SupervisionType;
 
 public class Test {
 
     public static void main(String[] args) {
-	MainControl m = new PatientControl();
-	DateTime currentDate = new DateTime();
-	System.out.println(currentDate);
-	// ((PatientControl) m).insertPatient(currentDate, 27, "1", "Wada
-	// zgryzu", AnesthesiaTechnique.BLOKADY_NERWOW, "wspol");
-	// ((PatientControl) m).insertPatient(currentDate, 14, "2", "dddddddd",
-	// "Ogolne", "sam");
-	// m.insertPatient(currentDate, 15, "4", "xxxxxxxxx", "Ogolne",
-	// "wspol");
-	// m.insertPatient(currentDate, 22, "5", "Hemorodiy", "pp", "sam");
-	// m.insertPatient(currentDate, 17, "2", "Rak uszu", "bn", "sam");
-	// m.insertPatient(currentDate, 52, "3", "Lupus", "og", "sam");
-	// m.insertPatient(currentDate, 27, "2", "Chloniak", "bn", "wspol");
 
-	List<Patient> patients = m.selectPatients();
-	PatientControl p = (PatientControl) m;
-	System.out.println("Lista pacjentow: ");
-	showPatientList(patients);
-	System.out.println(patients.get(9).equals(patients.get(9)));
+        PatientControl pc = new PatientControl();
+        DateTime currentDate = new DateTime();
+        System.out.println(currentDate);
+        for (int i = 0; i < 30; i++) {
+            int randomAsa = getRandomInRange(0, 10);
+            int randomAge = getRandomInRange(5, 95);
+
+//            pc.insertPatient(currentDate.plusDays(-randomAge+randomAsa), randomAge, randomAsa + "", "Krótki opis lub uwagi", AnesthesiaTechnique.randomAnesthesia(), SupervisionType.randomSupervision());
+
+        }
+
+        List<Patient> patients = pc.selectPatients();
+        showPatientList(patients);
 
 ////	p.editPatient(12, "06/09/2016", 27, "5", "Last lastowo", AnesthesiaTechnique.PODPAJECZYNOWKOWE, "sam");
 //	System.out.println();
@@ -42,8 +38,12 @@ public class Test {
 //	showPatientList(patients);
     }
 
+    private static int getRandomInRange(int min, int max) {
+        return min + (int) (Math.random() * ((max - min) + 1));
+    }
+
     private static void showPatientList(List<Patient> patients) {
-	for (Patient c : patients)
-	    System.out.println(c.toString());
+        for (Patient c : patients)
+            System.out.println(c.toString());
     }
 }
