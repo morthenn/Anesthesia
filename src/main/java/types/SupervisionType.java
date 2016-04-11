@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public enum SupervisionType {
+public enum SupervisionType{
 
     SAMODZIELNIE("sam."), WSPOLUDZIAL("współ.");
 
@@ -21,7 +21,7 @@ public enum SupervisionType {
         return fieldDescription;
     }
 
-    public static SupervisionType randomSupervision() {
+    public static SupervisionType randomField() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
 }

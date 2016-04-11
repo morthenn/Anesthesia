@@ -1,24 +1,26 @@
-package source;
+package utils;
 
+import com.sun.istack.internal.NotNull;
 import org.joda.time.DateTime;
 
-public class Patient {
+public class Patient implements Comparable<Patient> {
     private static final String SEPARATOR = "\t";
     private int evidencialNumber;
     private int patientAge;
     private DateTime regDate;
     private String asaFactor;
-    private String treatmentType;
+    private String Description;
     private String anesthesiaTechnique;
     private String supervisionType;
+    private Patient o;
 
-    public Patient(int evidencialNumber, DateTime regDate, int patientAge, String asaFactor, String treatmentType,
+    public Patient(int evidencialNumber, DateTime regDate, int patientAge, String asaFactor, String Description,
                    String anesthesiaTechnique, String supervisionType) {
         this.evidencialNumber = evidencialNumber;
         this.patientAge = patientAge;
         this.regDate = regDate;
         this.asaFactor = asaFactor;
-        this.treatmentType = treatmentType;
+        this.Description = Description;
         this.anesthesiaTechnique = anesthesiaTechnique;
         this.supervisionType = supervisionType;
     }
@@ -39,8 +41,8 @@ public class Patient {
         return asaFactor;
     }
 
-    public String getTreatmentType() {
-        return treatmentType;
+    public String getDescription() {
+        return Description;
     }
 
     public String getAnesthesiaTechnique() {
@@ -70,7 +72,7 @@ public class Patient {
                         .append("\t AsaCode : ")
                         .append(this.getAsaFactor())
                         .append("\t TreatmentType : ")
-                        .append(this.getTreatmentType())
+                        .append(this.getDescription())
                         .append("\t Technique : ")
                         .append(this.getAnesthesiaTechnique())
                         .append("\t Supervision : ")
@@ -88,7 +90,7 @@ public class Patient {
         result = prime * result + patientAge;
         result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
         result = prime * result + ((supervisionType == null) ? 0 : supervisionType.hashCode());
-        result = prime * result + ((treatmentType == null) ? 0 : treatmentType.hashCode());
+        result = prime * result + ((Description == null) ? 0 : Description.hashCode());
         return result;
     }
 
@@ -125,12 +127,16 @@ public class Patient {
                 return false;
         } else if ( ! supervisionType.equals(other.supervisionType) )
             return false;
-        if ( treatmentType == null ) {
-            if ( other.treatmentType != null )
+        if ( Description == null ) {
+            if ( other.Description != null )
                 return false;
-        } else if ( ! treatmentType.equals(other.treatmentType) )
+        } else if ( ! Description.equals(other.Description) )
             return false;
         return true;
     }
 
+    public int compareTo(Patient o) {
+        this.o = o;
+        return 0;
+    }
 }

@@ -3,27 +3,27 @@ package controller;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import controller.PatientDao;
-import source.Patient;
 import types.AnesthesiaTechnique;
+import types.AsaCode;
 import types.SupervisionType;
+import utils.Patient;
 
 public class MainController {
 
     public static void main(String[] args) {
 
-        PatientDao pc = new PatientDao();
+        PatientDao patientDao = new PatientDao();
+
         DateTime currentDate = new DateTime();
         System.out.println(currentDate);
-        for (int i = 0; i < 30; i++) {
-            int randomAsa = getRandomInRange(0, 10);
+        for ( int i = 0; i < 10; i++ ) {
             int randomAge = getRandomInRange(5, 95);
 
-//            pc.insertPatient(currentDate.plusDays(-randomAge+randomAsa), randomAge, randomAsa + "", "Opis zabiegu", AnesthesiaTechnique.randomAnesthesia(), SupervisionType.randomSupervision());
+//            patientDao.insertPatient(currentDate.plusDays(- randomAge + randomAge - 7), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
 
         }
 
-        List<Patient> patients = pc.selectPatients();
+        List<Patient> patients = patientDao.selectPatients();
         showPatientList(patients);
 
 ////	p.editPatient(12, "06/09/2016", 27, "5", "Last lastowo", AnesthesiaTechnique.PODPAJECZYNOWKOWE, "sam");
@@ -43,7 +43,7 @@ public class MainController {
     }
 
     private static void showPatientList(List<Patient> patients) {
-        for (Patient c : patients)
+        for ( Patient c : patients )
             System.out.println(c.toString());
     }
 }

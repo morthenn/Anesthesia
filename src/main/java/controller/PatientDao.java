@@ -8,6 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import types.AnesthesiaTechnique;
+import types.AsaCode;
 import types.SupervisionType;
 
 public class PatientDao extends DatabaseCreator {
@@ -46,7 +47,7 @@ public class PatientDao extends DatabaseCreator {
     /**
      * Insert new patient into database
      */
-    public void insertPatient(DateTime date, int age, String asaCode, String treatment, AnesthesiaTechnique anesthesia,
+    public void insertPatient(DateTime date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
                               SupervisionType supervision) {
 
         PreparedStatement prepStmt;
@@ -56,7 +57,7 @@ public class PatientDao extends DatabaseCreator {
             prepStmt = conn.prepareStatement(INSERT_PATIENT_QUERY);
             prepStmt.setDate(1, dateSql);
             prepStmt.setInt(2, age);
-            prepStmt.setString(3, asaCode);
+            prepStmt.setString(3, asaCode.getFieldDescription());
             prepStmt.setString(4, treatment);
             prepStmt.setString(5, anesthesia.getFieldDescription());
             prepStmt.setString(6, supervision.getFieldDescription());

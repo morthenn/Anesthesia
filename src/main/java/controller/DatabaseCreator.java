@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import source.Patient;
+import utils.Patient;
 
 public class DatabaseCreator {
 
@@ -51,7 +51,7 @@ public class DatabaseCreator {
 	    e.printStackTrace();
 	}
 
-	createTable();
+	createTableIfNotExists();
     }
 
 	//methods
@@ -59,7 +59,7 @@ public class DatabaseCreator {
      * Creates table if it don't exist
      */
 
-    private boolean createTable() {
+    private boolean createTableIfNotExists() {
 	try {
 	    stat.execute(CREATE_TABLE_QUERY);
 	} catch (SQLException e) {
