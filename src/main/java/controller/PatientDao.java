@@ -10,7 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 import types.AnesthesiaTechnique;
 import types.SupervisionType;
 
-public class PatientControl extends MainControl {
+public class PatientDao extends DatabaseCreator {
 
     private static final String INSERT_PATIENT_QUERY = "INSERT into test3 values (NULL, ?, ?, ?, ?, ?, ?);";
 
@@ -32,7 +32,7 @@ public class PatientControl extends MainControl {
 
     //constructor
 
-    public PatientControl() {
+    public PatientDao() {
         super();
     }
 

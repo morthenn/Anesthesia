@@ -1,25 +1,25 @@
-package source;
+package controller;
 
 import java.util.List;
-import java.util.Random;
 
 import org.joda.time.DateTime;
-import controller.PatientControl;
+import controller.PatientDao;
+import source.Patient;
 import types.AnesthesiaTechnique;
 import types.SupervisionType;
 
-public class Test {
+public class MainController {
 
     public static void main(String[] args) {
 
-        PatientControl pc = new PatientControl();
+        PatientDao pc = new PatientDao();
         DateTime currentDate = new DateTime();
         System.out.println(currentDate);
         for (int i = 0; i < 30; i++) {
             int randomAsa = getRandomInRange(0, 10);
             int randomAge = getRandomInRange(5, 95);
 
-//            pc.insertPatient(currentDate.plusDays(-randomAge+randomAsa), randomAge, randomAsa + "", "Krótki opis lub uwagi", AnesthesiaTechnique.randomAnesthesia(), SupervisionType.randomSupervision());
+//            pc.insertPatient(currentDate.plusDays(-randomAge+randomAsa), randomAge, randomAsa + "", "Opis zabiegu", AnesthesiaTechnique.randomAnesthesia(), SupervisionType.randomSupervision());
 
         }
 

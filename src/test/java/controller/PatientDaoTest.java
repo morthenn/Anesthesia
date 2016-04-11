@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Burza on 2016-04-03.first tests check
  */
-public class PatientControlTest {
+public class PatientDaoTest {
     @Test
     public void searchPatientByEvidencialNumber() throws Exception {
 

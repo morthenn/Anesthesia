@@ -12,7 +12,7 @@ import org.joda.time.DateTime;
 
 import source.Patient;
 
-public class MainControl {
+public class DatabaseCreator {
 
     // SQL - queries
     private static final String SELECT_ALL_PATIENTS_QUERY = "SELECT * FROM test3";
@@ -35,10 +35,10 @@ public class MainControl {
 
 	//constructor
 
-    MainControl() {
+    public DatabaseCreator() {
 
 	try {
-	    Class.forName(MainControl.DRIVER);
+	    Class.forName(DatabaseCreator.DRIVER);
 	} catch (ClassNotFoundException e) {
 	    System.err.println("Brak sterownika JDBC");
 	    e.printStackTrace();
