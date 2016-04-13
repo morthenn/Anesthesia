@@ -3,8 +3,7 @@ package utils;
 import com.sun.istack.internal.NotNull;
 import org.joda.time.DateTime;
 
-public class Patient implements Comparable<Patient> {
-    private static final String SEPARATOR = "\t";
+public class Patient {
     private int evidencialNumber;
     private int patientAge;
     private DateTime regDate;
@@ -12,7 +11,6 @@ public class Patient implements Comparable<Patient> {
     private String Description;
     private String anesthesiaTechnique;
     private String supervisionType;
-    private Patient o;
 
     public Patient(int evidencialNumber, DateTime regDate, int patientAge, String asaFactor, String Description,
                    String anesthesiaTechnique, String supervisionType) {
@@ -133,10 +131,5 @@ public class Patient implements Comparable<Patient> {
         } else if ( ! Description.equals(other.Description) )
             return false;
         return true;
-    }
-
-    public int compareTo(Patient o) {
-        this.o = o;
-        return 0;
     }
 }

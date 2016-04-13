@@ -1,30 +1,35 @@
-package controller;
-
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
+import controller.PatientDao;
 import org.joda.time.DateTime;
-import types.AnesthesiaTechnique;
-import types.AsaCode;
-import types.SupervisionType;
+import utils.Exporter;
 import utils.Patient;
 
-public class MainController {
+public class Main {
 
     public static void main(String[] args) {
 
         PatientDao patientDao = new PatientDao();
 
+        int temp =2;
+        temp =3;
         DateTime currentDate = new DateTime();
         System.out.println(currentDate);
-        for ( int i = 0; i < 10; i++ ) {
-            int randomAge = getRandomInRange(5, 95);
-
+//        for ( int i = 0; i < 10; i++ ) {
+//            int randomAge = getRandomInRange(5, 95);
+//
 //            patientDao.insertPatient(currentDate.plusDays(- randomAge + randomAge - 7), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
+//
+//        }
 
-        }
-
-        List<Patient> patients = patientDao.selectPatients();
+        ArrayList<Patient> patients = patientDao.selectPatients();
         showPatientList(patients);
+
+        Exporter exp = new Exporter();
+        exp.createXlsFileFromList(patients).exportFile();
+
 
 ////	p.editPatient(12, "06/09/2016", 27, "5", "Last lastowo", AnesthesiaTechnique.PODPAJECZYNOWKOWE, "sam");
 //	System.out.println();
