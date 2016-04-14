@@ -1,14 +1,14 @@
 package utils;
 
-import com.sun.istack.internal.NotNull;
 import org.joda.time.DateTime;
 
 public class Patient {
+    static final int AMOUINT_OF_DATA = 7;
     private int evidencialNumber;
     private int patientAge;
     private DateTime regDate;
     private String asaFactor;
-    private String Description;
+    private String description;
     private String anesthesiaTechnique;
     private String supervisionType;
 
@@ -18,7 +18,7 @@ public class Patient {
         this.patientAge = patientAge;
         this.regDate = regDate;
         this.asaFactor = asaFactor;
-        this.Description = Description;
+        this.description = Description;
         this.anesthesiaTechnique = anesthesiaTechnique;
         this.supervisionType = supervisionType;
     }
@@ -31,8 +31,8 @@ public class Patient {
         return patientAge;
     }
 
-    public DateTime getRegDate() {
-        return regDate;
+    public String getRegDate() {
+        return regDate.toString("dd-MM-yyyy");
     }
 
     public String getAsaFactor() {
@@ -40,7 +40,7 @@ public class Patient {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public String getAnesthesiaTechnique() {
@@ -59,6 +59,18 @@ public class Patient {
         this.supervisionType = supervisionType;
     }
 
+    public String[] getPatientInfoArray(){
+        String[] patientInfo = new String[AMOUINT_OF_DATA];
+        patientInfo[0]= String.valueOf(evidencialNumber);
+        patientInfo[1]= String.valueOf(patientAge);
+        patientInfo[2]= getRegDate();
+        patientInfo[3]= asaFactor;
+        patientInfo[4]= description;
+        patientInfo[5]= anesthesiaTechnique;
+        patientInfo[6]= supervisionType;
+
+        return patientInfo;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -66,7 +78,7 @@ public class Patient {
                 sb.append("EvidencialNumber: ")
                         .append(this.getEvidencialNumber())
                         .append("\t Date : ")
-                        .append(this.getRegDate().toString("dd/MM/yyyy"))
+                        .append(this.getRegDate())
                         .append("\t AsaCode : ")
                         .append(this.getAsaFactor())
                         .append("\t TreatmentType : ")
@@ -88,7 +100,7 @@ public class Patient {
         result = prime * result + patientAge;
         result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
         result = prime * result + ((supervisionType == null) ? 0 : supervisionType.hashCode());
-        result = prime * result + ((Description == null) ? 0 : Description.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
         return result;
     }
 
@@ -125,10 +137,10 @@ public class Patient {
                 return false;
         } else if ( ! supervisionType.equals(other.supervisionType) )
             return false;
-        if ( Description == null ) {
-            if ( other.Description != null )
+        if ( description == null ) {
+            if ( other.description != null )
                 return false;
-        } else if ( ! Description.equals(other.Description) )
+        } else if ( ! description.equals(other.description) )
             return false;
         return true;
     }

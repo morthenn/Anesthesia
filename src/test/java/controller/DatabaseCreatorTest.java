@@ -9,9 +9,6 @@ import static org.junit.Assert.*;
  */
 public class DatabaseCreatorTest {
 
-    @Test
-    public void selectPatients() throws Exception {
-        DatabaseCreator mc = new DatabaseCreator();
-        assertEquals("First database evidencial number must be 1", 1, mc.selectPatients().get(0).getEvidencialNumber());
-    }
+
+
 }

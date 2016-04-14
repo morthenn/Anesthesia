@@ -33,4 +33,9 @@ public class PatientDaoTest {
 
     }
 
+    @Test
+    public void selectPatients() throws Exception {
+        PatientDao patientDao = new PatientDao();
+        assertEquals("First database evidencial number must be 1", 1, patientDao.selectPatients().get(0).getEvidencialNumber());
+    }
 }
