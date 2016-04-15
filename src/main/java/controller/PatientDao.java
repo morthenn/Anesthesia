@@ -5,15 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import types.AnesthesiaTechnique;
-import types.AsaCode;
-import types.SupervisionType;
+import types.*;
 import utils.Patient;
 
 public class PatientDao extends DatabaseCreator {
@@ -36,20 +33,18 @@ public class PatientDao extends DatabaseCreator {
             + " WHERE EVIDENCIAL_NUMBER = ?;";
 
     private static final DateTimeFormatter DTF = DateTimeFormat.forPattern("dd/MM/yyyy");
+    ArrayList<Patient> patients= new ArrayList<Patient>();
 
 
     //constructor
 
     public PatientDao() {
         super();
+        patients = selectPatients();
     }
 
 
     //methods
-    // TODO first search, then modify
-    public void searchPatientByEvidencialNumber(int id) {
-
-    }
 
     /**
      * Insert new patient into database
@@ -70,7 +65,7 @@ public class PatientDao extends DatabaseCreator {
             prepStmt.setString(6, supervision.getFieldDescription());
             prepStmt.execute();
 
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             System.err.println("Blad przy dodawaniu nowego pacjenta");
             e.printStackTrace();
         }
@@ -105,7 +100,7 @@ public class PatientDao extends DatabaseCreator {
             prepStmt.setInt(7, id);
             prepStmt.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             System.err.println("Blad przy edycji pacjenta");
             e.printStackTrace();
         }
@@ -126,12 +121,13 @@ public class PatientDao extends DatabaseCreator {
             prepStmt.setInt(1, id);
             prepStmt.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             System.err.println("Blad przy usuwaniu pacjenta");
             e.printStackTrace();
         }
         System.out.println("Usunieto pacjenta");
     }
+
     /**
      * Show list of every registered patient in database
      */
@@ -142,28 +138,39 @@ public class PatientDao extends DatabaseCreator {
             Date dateDate;
             DateTime date;
             int id, age;
-            String asaCode, treatmentType, anesthesiaTechnique, supervisionType;
+            AsaCode asaCode;
+            String treatmentType;
+            AnesthesiaTechnique anesthesiaTechnique;
+            SupervisionType supervisionType;
 
-            while (result.next()) {
+            while ( result.next() ) {
                 id = result.getInt("EVIDENCIAL_NUMBER");
                 dateDate = result.getDate("REGISTERED_DATE");
                 date = new DateTime(dateDate);
                 age = result.getInt("AGE");
-                asaCode = result.getString("ASA_CODE");
+                asaCode = AsaCode.getNameByStringValue(result.getString("ASA_CODE"));
                 treatmentType = result.getString("TREATMENT_TYPE");
-                anesthesiaTechnique = result.getString("ANESTHESIA_TECHNIQUE");
-                supervisionType = result.getString("SUPERVISION_TYPE");
+                anesthesiaTechnique = AnesthesiaTechnique.getNameByStringValue(result.getString("ANESTHESIA_TECHNIQUE"));
+                supervisionType = SupervisionType.getNameByStringValue(result.getString("SUPERVISION_TYPE"));
                 patients.add(new Patient(id, date, age, asaCode, treatmentType, anesthesiaTechnique, supervisionType));
             }
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return null;
         }
         return patients;
     }
 
-    public void showPatientList(List<Patient> patients) {
-        for (Patient c : patients)
+    public void showPatientList() {
+        for ( Patient c : patients )
             System.out.println(c.toString());
+    }
+
+    public Patient searchPatientByEvidencialNumber(int id) {
+        for ( Patient patient : patients ) {
+            if ( patient.getEvidentialNumber() == id )
+                return patient;
+        }
+        return null;
     }
 }

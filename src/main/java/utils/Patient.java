@@ -1,30 +1,33 @@
 package utils;
 
 import org.joda.time.DateTime;
+import types.AnesthesiaTechnique;
+import types.AsaCode;
+import types.SupervisionType;
 
 public class Patient {
-    static final int AMOUINT_OF_DATA = 7;
-    private int evidencialNumber;
+    static final int AMOUNT_OF_DATA = 7;
+    private int evidentialNumber;
     private int patientAge;
     private DateTime regDate;
-    private String asaFactor;
+    private AsaCode asaCode;
     private String description;
-    private String anesthesiaTechnique;
-    private String supervisionType;
+    private AnesthesiaTechnique anesthesiaTechnique;
+    private SupervisionType supervisionType;
 
-    public Patient(int evidencialNumber, DateTime regDate, int patientAge, String asaFactor, String Description,
-                   String anesthesiaTechnique, String supervisionType) {
-        this.evidencialNumber = evidencialNumber;
+    public Patient(int evidentialNumber, DateTime regDate, int patientAge, AsaCode asaCode, String description,
+                   AnesthesiaTechnique anesthesiaTechnique, SupervisionType supervisionType) {
+        this.evidentialNumber = evidentialNumber;
         this.patientAge = patientAge;
         this.regDate = regDate;
-        this.asaFactor = asaFactor;
-        this.description = Description;
+        this.asaCode = asaCode;
+        this.description = description;
         this.anesthesiaTechnique = anesthesiaTechnique;
         this.supervisionType = supervisionType;
     }
 
-    public int getEvidencialNumber() {
-        return evidencialNumber;
+    public int getEvidentialNumber() {
+        return evidentialNumber;
     }
 
     public int getPatientAge() {
@@ -35,52 +38,53 @@ public class Patient {
         return regDate.toString("dd-MM-yyyy");
     }
 
-    public String getAsaFactor() {
-        return asaFactor;
+    public AsaCode getAsaCode() {
+        return asaCode;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getAnesthesiaTechnique() {
+    public AnesthesiaTechnique getAnesthesiaTechnique() {
         return anesthesiaTechnique;
     }
 
-    public void setAnesthesiaTechnique(String anesthesiaTechnique) {
+    public void setAnesthesiaTechnique(AnesthesiaTechnique anesthesiaTechnique) {
         this.anesthesiaTechnique = anesthesiaTechnique;
     }
 
-    public String getSupervisionType() {
+    public SupervisionType getSupervisionType() {
         return supervisionType;
     }
 
-    public void setSupervisionType(String supervisionType) {
+    public void setSupervisionType(SupervisionType supervisionType) {
         this.supervisionType = supervisionType;
     }
 
-    public String[] getPatientInfoArray(){
-        String[] patientInfo = new String[AMOUINT_OF_DATA];
-        patientInfo[0]= String.valueOf(evidencialNumber);
-        patientInfo[1]= String.valueOf(patientAge);
-        patientInfo[2]= getRegDate();
-        patientInfo[3]= asaFactor;
-        patientInfo[4]= description;
-        patientInfo[5]= anesthesiaTechnique;
-        patientInfo[6]= supervisionType;
+    public String[] getPatientInfoArray() {
+        String[] patientInfo = new String[AMOUNT_OF_DATA];
+        patientInfo[0] = String.valueOf(evidentialNumber);
+        patientInfo[1] = String.valueOf(patientAge);
+        patientInfo[2] = getRegDate();
+        patientInfo[3] = asaCode.getFieldDescription();
+        patientInfo[4] = description;
+        patientInfo[5] = anesthesiaTechnique.getFieldDescription();
+        patientInfo[6] = supervisionType.getFieldDescription();
 
         return patientInfo;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return
                 sb.append("EvidencialNumber: ")
-                        .append(this.getEvidencialNumber())
+                        .append(this.getEvidentialNumber())
                         .append("\t Date : ")
                         .append(this.getRegDate())
                         .append("\t AsaCode : ")
-                        .append(this.getAsaFactor())
+                        .append(this.getAsaCode())
                         .append("\t TreatmentType : ")
                         .append(this.getDescription())
                         .append("\t Technique : ")
@@ -92,56 +96,31 @@ public class Patient {
 
     @Override
     public int hashCode() {
-        final int prime = 27;
-        int result = 1;
-        result = prime * result + ((anesthesiaTechnique == null) ? 0 : anesthesiaTechnique.hashCode());
-        result = prime * result + ((asaFactor == null) ? 0 : asaFactor.hashCode());
-        result = prime * result + evidencialNumber;
-        result = prime * result + patientAge;
-        result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
-        result = prime * result + ((supervisionType == null) ? 0 : supervisionType.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        int result = evidentialNumber;
+        result = 31 * result + patientAge;
+        result = 31 * result + regDate.hashCode();
+        result = 31 * result + asaCode.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + anesthesiaTechnique.hashCode();
+        result = 31 * result + supervisionType.hashCode();
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if ( this == obj )
-            return true;
-        if ( obj == null )
+    public boolean equals(Object o) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        Patient patient = (Patient) o;
+
+        if ( evidentialNumber != patient.evidentialNumber ) return false;
+        if ( patientAge != patient.patientAge ) return false;
+        if ( ! regDate.equals(patient.regDate) ) return false;
+        if ( asaCode != patient.asaCode ) return false;
+        if ( description != null ? ! description.equals(patient.description) : patient.description != null )
             return false;
-        if ( getClass() != obj.getClass() )
-            return false;
-        Patient other = (Patient) obj;
-        if ( anesthesiaTechnique == null ) {
-            if ( other.anesthesiaTechnique != null )
-                return false;
-        } else if ( ! anesthesiaTechnique.equals(other.anesthesiaTechnique) )
-            return false;
-        if ( asaFactor == null ) {
-            if ( other.asaFactor != null )
-                return false;
-        } else if ( ! asaFactor.equals(other.asaFactor) )
-            return false;
-        if ( evidencialNumber != other.evidencialNumber )
-            return false;
-        if ( patientAge != other.patientAge )
-            return false;
-        if ( regDate == null ) {
-            if ( other.regDate != null )
-                return false;
-        } else if ( ! regDate.equals(other.regDate) )
-            return false;
-        if ( supervisionType == null ) {
-            if ( other.supervisionType != null )
-                return false;
-        } else if ( ! supervisionType.equals(other.supervisionType) )
-            return false;
-        if ( description == null ) {
-            if ( other.description != null )
-                return false;
-        } else if ( ! description.equals(other.description) )
-            return false;
-        return true;
+        if ( anesthesiaTechnique != patient.anesthesiaTechnique ) return false;
+        return supervisionType == patient.supervisionType;
+
     }
 }

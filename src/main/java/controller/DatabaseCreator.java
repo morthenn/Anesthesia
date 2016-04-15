@@ -33,19 +33,17 @@ public class DatabaseCreator {
     Statement stat;
 
     //constructor
-
     DatabaseCreator() {
-
         try {
             Class.forName(DatabaseCreator.DRIVER);
-        } catch (ClassNotFoundException e) {
+        } catch ( ClassNotFoundException e ) {
             System.err.println("Brak sterownika JDBC");
             e.printStackTrace();
         }
         try {
             conn = DriverManager.getConnection(DB_URL);
             stat = conn.createStatement();
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             System.err.println("Problem z otwarciem polaczenia");
             e.printStackTrace();
         }
@@ -62,7 +60,7 @@ public class DatabaseCreator {
     private boolean createTableIfNotExists() {
         try {
             stat.execute(CREATE_TABLE_QUERY);
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             System.err.println("Blad przy tworzeniu tabeli");
             e.printStackTrace();
             return false;

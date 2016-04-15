@@ -16,15 +16,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //        for (int i = 0; i < 68; i++) {
+//                for (int i = 0; i < 68; i++) {
 //            int randomAge = getRandomInRange(5, 95);
-//            patientDao.insertPatient(currentDate.plusDays(-getRandomInRange(1, 20)), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
+//            patientDao.insertPatient(DateTime.now().plusDays(-getRandomInRange(1, 20)), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
 //        }
+        patientDao.showPatientList();
 
-        ArrayList<Patient> patients = patientDao.selectPatients();
-        patientDao.showPatientList(patients);
-
-//        exp.createXlsFileFromList(patients).exportFile();
+        exp.createXlsFileFromList(patientDao.selectPatients()).exportFile();
 
 
 //	patientDao.editPatient(12, "06/09/2016", 27, AsaCode.ONE, "EDIT", AnesthesiaTechnique.PODPAJECZYNOWKOWE, SupervisionType.SAMODZIELNIE);

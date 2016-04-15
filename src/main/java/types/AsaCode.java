@@ -15,6 +15,7 @@ public enum AsaCode {
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
     private final String fieldDescription;
+    AsaCode code;
 
     AsaCode(String value) {
         fieldDescription = value;
@@ -26,5 +27,13 @@ public enum AsaCode {
 
     public static AsaCode randomField() {
         return VALUES.get(RANDOM.nextInt(SIZE));
+    }
+
+    public static AsaCode getNameByStringValue(String value) {
+        for ( AsaCode e : AsaCode.values() ) {
+            if ( value.equals(e.getFieldDescription())  )
+                return e;
+        }
+        return null;
     }
 }

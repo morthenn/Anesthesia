@@ -17,19 +17,22 @@ import java.util.ArrayList;
 public class Exporter {
 
     private static final String SHEET_NAME = "Database Export";
+    private static final String[] HEADERS = {"Nr. ewidencyjny", "Data", "Wiek", "ASA", "Uwagi", "Technika", "Nadzór"};
     private HSSFWorkbook workbook;
+    HSSFSheet sheet;
 
     public Exporter() {
         this.workbook = new HSSFWorkbook();
+        sheet = workbook.createSheet(SHEET_NAME);
+        makeHeaderRow(sheet);
     }
 
     public Exporter createXlsFileFromList(ArrayList<Patient> patientList) {
 
-        HSSFSheet sheet = workbook.createSheet(SHEET_NAME);
-        for (int i = 0; i < patientList.size(); i++) {
+        for ( int i = 0; i < patientList.size(); i++ ) {
             HSSFRow row = sheet.createRow(i);
             String[] patientDetails = patientList.get(i).getPatientInfoArray();
-            for (int j = 0; j < Patient.AMOUINT_OF_DATA; j++) {
+            for ( int j = 0; j < Patient.AMOUNT_OF_DATA; j++ ) {
                 HSSFCell cell = row.createCell(j);
                 cell.setCellValue(patientDetails[j]);
             }
@@ -44,9 +47,16 @@ public class Exporter {
             workbook.write(fos);
             fos.close();
             return true;
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private void makeHeaderRow(HSSFSheet sheet) {
+        for ( int rown = 0; rown < HEADERS.length; rown++ ) {
+            HSSFRow headerRow = sheet.createRow(rown);
+            headerRow.createCell(0).setCellValue(HEADERS[rown]);
         }
     }
 }

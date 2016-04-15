@@ -25,5 +25,12 @@ public enum AnesthesiaTechnique {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
 
+    public static AnesthesiaTechnique getNameByStringValue(String value) {
+        for ( AnesthesiaTechnique e : AnesthesiaTechnique.values() ) {
+            if ( value.equals(e.getFieldDescription()) )
+                return e;
+        }
+        return null;
+    }
 
 }

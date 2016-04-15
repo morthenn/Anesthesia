@@ -24,5 +24,13 @@ public enum SupervisionType{
     public static SupervisionType randomField() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
+
+    public static SupervisionType getNameByStringValue(String value) {
+        for ( SupervisionType e : SupervisionType.values() ) {
+            if (value.equals(e.getFieldDescription())  )
+                return e;
+        }
+        return null;
+    }
 }
 
