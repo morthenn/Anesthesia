@@ -15,8 +15,8 @@ public class Main {
     private static Exporter exp = new Exporter();
 
     public static void main(String[] args) {
-
-//                for (int i = 0; i < 68; i++) {
+//
+//                for (int i = 0; i < 112; i++) {
 //            int randomAge = getRandomInRange(5, 95);
 //            patientDao.insertPatient(DateTime.now().plusDays(-getRandomInRange(1, 20)), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
 //        }

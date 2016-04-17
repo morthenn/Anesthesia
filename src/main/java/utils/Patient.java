@@ -65,8 +65,8 @@ public class Patient {
     public String[] getPatientInfoArray() {
         String[] patientInfo = new String[AMOUNT_OF_DATA];
         patientInfo[0] = String.valueOf(evidentialNumber);
-        patientInfo[1] = String.valueOf(patientAge);
-        patientInfo[2] = getRegDate();
+        patientInfo[1] = getRegDate();
+        patientInfo[2] = String.valueOf(patientAge);
         patientInfo[3] = asaCode.getFieldDescription();
         patientInfo[4] = description;
         patientInfo[5] = anesthesiaTechnique.getFieldDescription();

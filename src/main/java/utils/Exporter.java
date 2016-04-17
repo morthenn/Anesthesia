@@ -29,10 +29,10 @@ public class Exporter {
 
     public Exporter createXlsFileFromList(ArrayList<Patient> patientList) {
 
-        for ( int i = 0; i < patientList.size(); i++ ) {
+        for (int i = 1; i < patientList.size(); i++) {
             HSSFRow row = sheet.createRow(i);
-            String[] patientDetails = patientList.get(i).getPatientInfoArray();
-            for ( int j = 0; j < Patient.AMOUNT_OF_DATA; j++ ) {
+            String[] patientDetails = patientList.get(i - 1).getPatientInfoArray();
+            for (int j = 0; j < HEADERS.length; j++) {
                 HSSFCell cell = row.createCell(j);
                 cell.setCellValue(patientDetails[j]);
             }
@@ -47,16 +47,18 @@ public class Exporter {
             workbook.write(fos);
             fos.close();
             return true;
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
     }
 
     private void makeHeaderRow(HSSFSheet sheet) {
-        for ( int rown = 0; rown < HEADERS.length; rown++ ) {
-            HSSFRow headerRow = sheet.createRow(rown);
-            headerRow.createCell(0).setCellValue(HEADERS[rown]);
+
+        HSSFRow headerRow = sheet.createRow(0);
+        for (int i = 0; i < HEADERS.length; i++) {
+            headerRow.createCell(i).setCellValue(HEADERS[i]);
         }
     }
+
 }
