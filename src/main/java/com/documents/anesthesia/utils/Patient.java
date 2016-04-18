@@ -1,9 +1,9 @@
-package utils;
+package com.documents.anesthesia.utils;
 
 import org.joda.time.DateTime;
-import types.AnesthesiaTechnique;
-import types.AsaCode;
-import types.SupervisionType;
+import com.documents.anesthesia.types.AnesthesiaTechnique;
+import com.documents.anesthesia.types.AsaCode;
+import com.documents.anesthesia.types.SupervisionType;
 
 public class Patient {
     static final int AMOUNT_OF_DATA = 7;

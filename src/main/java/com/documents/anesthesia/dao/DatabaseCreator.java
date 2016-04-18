@@ -1,22 +1,25 @@
-package controller;
+package com.documents.anesthesia.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
-import org.joda.time.DateTime;
-
-import utils.Patient;
 
 public class DatabaseCreator {
 
     // SQL - queries
-    private static final String CREATE_TABLE_QUERY = "CREATE TABLE"
+    private static final String CREATE_TEST_TABLE_QUERY = "CREATE TABLE"
             + " if not exists test3"
+            + "(EVIDENCIAL_NUMBER INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "REGISTERED_DATE DATE,"
+            + "AGE INTEGER,"
+            + "ASA_CODE TEXT,"
+            + "TREATMENT_TYPE TEXT,"
+            + "ANESTHESIA_TECHNIQUE TEXT,"
+            + "SUPERVISION_TYPE TEXT)";
+
+    private static final String CREATE_TABLE_QUERY = "CREATE TABLE"
+            + " if not exists prod"
             + "(EVIDENCIAL_NUMBER INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "REGISTERED_DATE DATE,"
             + "AGE INTEGER,"
@@ -48,7 +51,7 @@ public class DatabaseCreator {
             e.printStackTrace();
         }
 
-        createTableIfNotExists();
+        createTablesIfNotExists();
     }
 
     //methods
@@ -57,8 +60,9 @@ public class DatabaseCreator {
      * Creates table if it doesn't exist
      */
 
-    private boolean createTableIfNotExists() {
+    private boolean createTablesIfNotExists() {
         try {
+            stat.execute(CREATE_TEST_TABLE_QUERY);
             stat.execute(CREATE_TABLE_QUERY);
         } catch ( SQLException e ) {
             System.err.println("Blad przy tworzeniu tabeli");

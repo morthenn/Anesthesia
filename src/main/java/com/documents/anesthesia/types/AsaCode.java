@@ -1,4 +1,4 @@
-package types;
+package com.documents.anesthesia.types;
 
 import java.util.Arrays;
 import java.util.List;

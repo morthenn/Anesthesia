@@ -1,4 +1,4 @@
-package controller;
+package com.documents.anesthesia.dao;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.documents.anesthesia.types.AnesthesiaTechnique;
+import com.documents.anesthesia.types.AsaCode;
+import com.documents.anesthesia.types.SupervisionType;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import types.*;
-import utils.Patient;
+import com.documents.anesthesia.utils.Patient;
 
 public class PatientDao extends DatabaseCreator {
 
@@ -33,7 +35,8 @@ public class PatientDao extends DatabaseCreator {
             + " WHERE EVIDENCIAL_NUMBER = ?;";
 
     private static final DateTimeFormatter DTF = DateTimeFormat.forPattern("dd/MM/yyyy");
-    ArrayList<Patient> patients= new ArrayList<Patient>();
+    private ArrayList<Patient> patients;
+    private PreparedStatement prepStmt;
 
 
     //constructor
@@ -42,17 +45,14 @@ public class PatientDao extends DatabaseCreator {
         super();
         patients = selectPatients();
     }
-
-
     //methods
 
     /**
      * Insert new patient into database
      */
-    public void insertPatient(DateTime date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
-                              SupervisionType supervision) {
+    public boolean insertPatient(DateTime date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
+                                 SupervisionType supervision) {
 
-        PreparedStatement prepStmt;
         java.sql.Date dateSql = new java.sql.Date(date.getMillis());
         try {
 
@@ -68,8 +68,10 @@ public class PatientDao extends DatabaseCreator {
         } catch ( SQLException e ) {
             System.err.println("Blad przy dodawaniu nowego pacjenta");
             e.printStackTrace();
+            return false;
         }
         System.out.println("Dodano pacjenta");
+        return true;
     }
 
 
@@ -80,17 +82,16 @@ public class PatientDao extends DatabaseCreator {
      * Edit patient's details id, date, age, asa, treatment type, anesthesia,
      * supervision
      */
-    public void editPatient(int id, String date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
-                            SupervisionType supervision) {
+    public boolean editPatient(int id, String date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
+                               SupervisionType supervision) {
 
         String query = EDIT_PATIENT_QUERY;
 
         DateTime valueDate = DTF.parseDateTime(date);
-        PreparedStatement prepStmt;
         java.sql.Date dateSql = new java.sql.Date(valueDate.getMillis());
 
         try {
-            prepStmt = super.conn.prepareStatement(query);
+            prepStmt = conn.prepareStatement(query);
             prepStmt.setDate(1, dateSql);
             prepStmt.setInt(2, age);
             prepStmt.setString(3, asaCode.getFieldDescription());
@@ -103,38 +104,37 @@ public class PatientDao extends DatabaseCreator {
         } catch ( SQLException e ) {
             System.err.println("Blad przy edycji pacjenta");
             e.printStackTrace();
+            return false;
         }
         System.out.println("Edycja pacjenta przebiegla pomyslnie");
+        return true;
     }
 
     /**
      * Remove patient from DB
      */
-    public void removePatient(int id) {
-
-        String query = REMOVE_PATIENT_QUERY;
-
-        PreparedStatement prepStmt;
-
+    public boolean removePatient(int id) {
         try {
-            prepStmt = super.conn.prepareStatement(query);
+            prepStmt = conn.prepareStatement(REMOVE_PATIENT_QUERY);
             prepStmt.setInt(1, id);
             prepStmt.executeUpdate();
 
         } catch ( SQLException e ) {
             System.err.println("Blad przy usuwaniu pacjenta");
             e.printStackTrace();
+            return false;
         }
         System.out.println("Usunieto pacjenta");
+        return true;
     }
 
     /**
      * Show list of every registered patient in database
      */
     public ArrayList<Patient> selectPatients() {
-        ArrayList<Patient> patients = new ArrayList<Patient>();
+        patients = new ArrayList<Patient>();
         try {
-            ResultSet result = super.stat.executeQuery(SELECT_ALL_PATIENTS_QUERY);
+            ResultSet result = stat.executeQuery(SELECT_ALL_PATIENTS_QUERY);
             Date dateDate;
             DateTime date;
             int id, age;
@@ -166,11 +166,4 @@ public class PatientDao extends DatabaseCreator {
             System.out.println(c.toString());
     }
 
-    public Patient searchPatientByEvidencialNumber(int id) {
-        for ( Patient patient : patients ) {
-            if ( patient.getEvidentialNumber() == id )
-                return patient;
-        }
-        return null;
-    }
 }
