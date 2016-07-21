@@ -18,7 +18,15 @@ public class Main {
 //
 //                for (int i = 0; i < 112; i++) {
 //            int randomAge = getRandomInRange(5, 95);
-//            patientDao.insertPatient(DateTime.now().plusDays(-getRandomInRange(1, 20)), randomAge, AsaCode.randomField(), "Opis zabiegu po operacji", AnesthesiaTechnique.randomField(), SupervisionType.randomField());
+//        patientDao.insertPatient(new Patient.PatientBuilder()
+//                .withEvidentialNumber(299)
+//                .withRegisteredDate(DateTime.now())
+//                .withAge(99)
+//                .withDescription("Ostatni tescik buildera")
+//                .withSupervisionType(SupervisionType.WSPOLUDZIAL)
+//                .withAnesthesiaTechnique(AnesthesiaTechnique.BLOKADY_NERWOW)
+//                .withAsaCode(AsaCode.FIVE_E)
+//                .build());
 //        }
         patientDao.showPatientList();
 

@@ -7,12 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import org.joda.time.DateTime;
-
 import utils.Patient;
 
-public class DatabaseCreator {
+class DatabaseCreator {
 
     // SQL - queries
     private static final String CREATE_TABLE_QUERY = "CREATE TABLE"

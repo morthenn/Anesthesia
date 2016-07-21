@@ -6,7 +6,7 @@ import types.AsaCode;
 import types.SupervisionType;
 
 public class Patient {
-    static final int AMOUNT_OF_DATA = 7;
+    static final int COLUMNS_AMOUNT = 7;
     private int evidentialNumber;
     private int patientAge;
     private DateTime regDate;
@@ -15,15 +15,14 @@ public class Patient {
     private AnesthesiaTechnique anesthesiaTechnique;
     private SupervisionType supervisionType;
 
-    public Patient(int evidentialNumber, DateTime regDate, int patientAge, AsaCode asaCode, String description,
-                   AnesthesiaTechnique anesthesiaTechnique, SupervisionType supervisionType) {
-        this.evidentialNumber = evidentialNumber;
-        this.patientAge = patientAge;
-        this.regDate = regDate;
-        this.asaCode = asaCode;
-        this.description = description;
-        this.anesthesiaTechnique = anesthesiaTechnique;
-        this.supervisionType = supervisionType;
+    private Patient(PatientBuilder patientBuilder) {
+        this.evidentialNumber = patientBuilder.evidentialNumber;
+        this.patientAge = patientBuilder.patientAge;
+        this.regDate = patientBuilder.regDate;
+        this.asaCode = patientBuilder.asaCode;
+        this.description = patientBuilder.description;
+        this.anesthesiaTechnique = patientBuilder.anesthesiaTechnique;
+        this.supervisionType = patientBuilder.supervisionType;
     }
 
     public int getEvidentialNumber() {
@@ -34,8 +33,8 @@ public class Patient {
         return patientAge;
     }
 
-    public String getRegDate() {
-        return regDate.toString("dd-MM-yyyy");
+    public DateTime getRegDate() {
+        return regDate;
     }
 
     public AsaCode getAsaCode() {
@@ -50,22 +49,15 @@ public class Patient {
         return anesthesiaTechnique;
     }
 
-    public void setAnesthesiaTechnique(AnesthesiaTechnique anesthesiaTechnique) {
-        this.anesthesiaTechnique = anesthesiaTechnique;
-    }
-
     public SupervisionType getSupervisionType() {
         return supervisionType;
     }
 
-    public void setSupervisionType(SupervisionType supervisionType) {
-        this.supervisionType = supervisionType;
-    }
 
     public String[] getPatientInfoArray() {
-        String[] patientInfo = new String[AMOUNT_OF_DATA];
+        String[] patientInfo = new String[COLUMNS_AMOUNT];
         patientInfo[0] = String.valueOf(evidentialNumber);
-        patientInfo[1] = getRegDate();
+        patientInfo[1] = getRegDate().toString("dd-MM-yyyy");
         patientInfo[2] = String.valueOf(patientAge);
         patientInfo[3] = asaCode.getFieldDescription();
         patientInfo[4] = description;
@@ -81,6 +73,8 @@ public class Patient {
         return
                 sb.append("EvidencialNumber: ")
                         .append(this.getEvidentialNumber())
+                        .append("Age: ")
+                        .append(this.getPatientAge())
                         .append("\t Date : ")
                         .append(this.getRegDate())
                         .append("\t AsaCode : ")
@@ -108,19 +102,75 @@ public class Patient {
 
     @Override
     public boolean equals(Object o) {
-        if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Patient patient = (Patient) o;
 
-        if ( evidentialNumber != patient.evidentialNumber ) return false;
-        if ( patientAge != patient.patientAge ) return false;
-        if ( ! regDate.equals(patient.regDate) ) return false;
-        if ( asaCode != patient.asaCode ) return false;
-        if ( description != null ? ! description.equals(patient.description) : patient.description != null )
+        if (evidentialNumber != patient.evidentialNumber) return false;
+        if (patientAge != patient.patientAge) return false;
+        if (!regDate.equals(patient.regDate)) return false;
+        if (asaCode != patient.asaCode) return false;
+        if (description != null ? !description.equals(patient.description) : patient.description != null)
             return false;
-        if ( anesthesiaTechnique != patient.anesthesiaTechnique ) return false;
+        if (anesthesiaTechnique != patient.anesthesiaTechnique) return false;
         return supervisionType == patient.supervisionType;
+
+    }
+
+    public static class PatientBuilder {
+        private int evidentialNumber;
+        private int patientAge;
+        private DateTime regDate;
+        private AsaCode asaCode;
+        private String description;
+        private AnesthesiaTechnique anesthesiaTechnique;
+        private SupervisionType supervisionType;
+
+        public PatientBuilder withEvidentialNumber(int evidentialNumber) {
+            this.evidentialNumber = evidentialNumber;
+            return this;
+
+        }
+
+        public PatientBuilder withAge(int patientAge) {
+            this.patientAge = patientAge;
+            return this;
+
+        }
+
+        public PatientBuilder withRegisteredDate(DateTime regDate) {
+            this.regDate = regDate;
+            return this;
+        }
+
+        public PatientBuilder withAsaCode(AsaCode asaCode) {
+            this.asaCode = asaCode;
+            return this;
+
+        }
+
+        public PatientBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+
+        }
+
+        public PatientBuilder withAnesthesiaTechnique(AnesthesiaTechnique anesthesiaTechnique) {
+            this.anesthesiaTechnique = anesthesiaTechnique;
+            return this;
+
+        }
+
+        public PatientBuilder withSupervisionType(SupervisionType supervisionType) {
+            this.supervisionType = supervisionType;
+            return this;
+
+        }
+
+        public Patient build() {
+            return new Patient(this);
+        }
 
     }
 }

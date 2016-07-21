@@ -33,9 +33,7 @@ public class PatientDao extends DatabaseCreator {
             + " WHERE EVIDENCIAL_NUMBER = ?;";
 
     private static final DateTimeFormatter DTF = DateTimeFormat.forPattern("dd/MM/yyyy");
-    ArrayList<Patient> patients= new ArrayList<Patient>();
-
-
+    ArrayList<Patient> patients = new ArrayList<Patient>();
     //constructor
 
     public PatientDao() {
@@ -49,27 +47,25 @@ public class PatientDao extends DatabaseCreator {
     /**
      * Insert new patient into database
      */
-    public void insertPatient(DateTime date, int age, AsaCode asaCode, String treatment, AnesthesiaTechnique anesthesia,
-                              SupervisionType supervision) {
+    public void insertPatient(Patient patient) {
 
         PreparedStatement prepStmt;
-        java.sql.Date dateSql = new java.sql.Date(date.getMillis());
         try {
 
             prepStmt = conn.prepareStatement(INSERT_PATIENT_QUERY);
-            prepStmt.setDate(1, dateSql);
-            prepStmt.setInt(2, age);
-            prepStmt.setString(3, asaCode.getFieldDescription());
-            prepStmt.setString(4, treatment);
-            prepStmt.setString(5, anesthesia.getFieldDescription());
-            prepStmt.setString(6, supervision.getFieldDescription());
+            prepStmt.setDate(1, new Date(patient.getRegDate().getMillis()));
+            prepStmt.setInt(2, patient.getPatientAge());
+            prepStmt.setString(3, patient.getAsaCode().getFieldDescription());
+            prepStmt.setString(4, patient.getDescription());
+            prepStmt.setString(5, patient.getAnesthesiaTechnique().getFieldDescription());
+            prepStmt.setString(6, patient.getSupervisionType().getFieldDescription());
             prepStmt.execute();
 
-        } catch ( SQLException e ) {
-            System.err.println("Blad przy dodawaniu nowego pacjenta");
+        } catch (SQLException e) {
+            System.err.println("Error on patient insertion");
             e.printStackTrace();
         }
-        System.out.println("Dodano pacjenta");
+        System.out.println("Patient added");
     }
 
 
@@ -95,12 +91,12 @@ public class PatientDao extends DatabaseCreator {
             prepStmt.setInt(2, age);
             prepStmt.setString(3, asaCode.getFieldDescription());
             prepStmt.setString(4, treatment);
-            prepStmt.setString(5, anesthesia.getFieldDescription());
+            prepStmt.setString(5, anesthesia.toString());
             prepStmt.setString(6, supervision.getFieldDescription());
             prepStmt.setInt(7, id);
             prepStmt.executeUpdate();
 
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             System.err.println("Blad przy edycji pacjenta");
             e.printStackTrace();
         }
@@ -121,11 +117,11 @@ public class PatientDao extends DatabaseCreator {
             prepStmt.setInt(1, id);
             prepStmt.executeUpdate();
 
-        } catch ( SQLException e ) {
-            System.err.println("Blad przy usuwaniu pacjenta");
+        } catch (SQLException e) {
+            System.err.println("Error in patient removal");
             e.printStackTrace();
         }
-        System.out.println("Usunieto pacjenta");
+        System.out.println("Patient removed");
     }
 
     /**
@@ -139,22 +135,30 @@ public class PatientDao extends DatabaseCreator {
             DateTime date;
             int id, age;
             AsaCode asaCode;
-            String treatmentType;
+            String description;
             AnesthesiaTechnique anesthesiaTechnique;
             SupervisionType supervisionType;
 
-            while ( result.next() ) {
+            while (result.next()) {
                 id = result.getInt("EVIDENCIAL_NUMBER");
                 dateDate = result.getDate("REGISTERED_DATE");
                 date = new DateTime(dateDate);
                 age = result.getInt("AGE");
                 asaCode = AsaCode.getNameByStringValue(result.getString("ASA_CODE"));
-                treatmentType = result.getString("TREATMENT_TYPE");
+                description = result.getString("TREATMENT_TYPE");
                 anesthesiaTechnique = AnesthesiaTechnique.getNameByStringValue(result.getString("ANESTHESIA_TECHNIQUE"));
                 supervisionType = SupervisionType.getNameByStringValue(result.getString("SUPERVISION_TYPE"));
-                patients.add(new Patient(id, date, age, asaCode, treatmentType, anesthesiaTechnique, supervisionType));
+                patients.add(new Patient.PatientBuilder()
+                        .withEvidentialNumber(id)
+                        .withRegisteredDate(date)
+                        .withAge(age)
+                        .withAsaCode(asaCode)
+                        .withDescription(description)
+                        .withAnesthesiaTechnique(anesthesiaTechnique)
+                        .withSupervisionType(supervisionType)
+                        .build());
             }
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
@@ -162,13 +166,13 @@ public class PatientDao extends DatabaseCreator {
     }
 
     public void showPatientList() {
-        for ( Patient c : patients )
+        for (Patient c : patients)
             System.out.println(c.toString());
     }
 
     public Patient searchPatientByEvidencialNumber(int id) {
-        for ( Patient patient : patients ) {
-            if ( patient.getEvidentialNumber() == id )
+        for (Patient patient : patients) {
+            if (patient.getEvidentialNumber() == id)
                 return patient;
         }
         return null;

@@ -17,29 +17,7 @@ import static org.junit.Assert.*;
 public class PatientDaoTest {
 PatientDao patientDao = new PatientDao();
 
-    @Test
-    public void insertPatient() throws Exception {
-        ArrayList<Patient> list = patientDao.selectPatients();
-        patientDao.insertPatient(DateTime.now().withDate(2000, 1, 1), 999, AsaCode.ONE, "Test description", AnesthesiaTechnique.OGOLNE, SupervisionType.SAMODZIELNIE);
-        assertEquals("Inserting patient, expected list size shall be size()+1", list.size()+1, patientDao.selectPatients().size());
-    }
 
-    @Test
-    public void editPatient() throws Exception {
-
-    }
-
-    @Test
-    public void removePatient() throws Exception {
-        ArrayList<Patient> list = patientDao.selectPatients();
-        patientDao.removePatient(list.size());
-        assertEquals("Removing patient, expected list size shall be size()-1", list.size()-1, patientDao.selectPatients().size());
-    }
-
-    @Test
-    public void insertPatient1() throws Exception {
-
-    }
 
     @Test
     public void selectPatients() throws Exception {
