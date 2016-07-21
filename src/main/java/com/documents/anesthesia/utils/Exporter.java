@@ -1,4 +1,4 @@
-package utils;
+package com.documents.anesthesia.utils;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
 
 /**
  * Responsible for patients export as XLS file
@@ -31,7 +30,7 @@ public class Exporter {
 
         for (int i = 1; i < patientList.size(); i++) {
             HSSFRow row = sheet.createRow(i);
-            String[] patientDetails = patientList.get(i - 1).getPatientInfoArray();
+            String[] patientDetails = patientList.get(i - 2).getPatientInfoArray();
             for (int j = 0; j < HEADERS.length; j++) {
                 HSSFCell cell = row.createCell(j);
                 cell.setCellValue(patientDetails[j]);
