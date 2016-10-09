@@ -2,12 +2,18 @@ package model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import patientDao.PatientManager;
 import org.joda.time.DateTime;
 
-@DatabaseTable(tableName = "patients")
-public class Patient {
+import model.types.*;
+
+import java.io.Serializable;
+
+@DatabaseTable(tableName = "patients", daoClass = PatientManager.class)
+public class Patient implements Serializable {
     private static final String SEPARATOR = "\t";
-    @DatabaseField(id = true, generatedId=true, allowGeneratedIdInsert = true)
+
+    @DatabaseField(id = true)
     private int id;
     @DatabaseField
     private int evidencialNumber;
@@ -24,31 +30,37 @@ public class Patient {
     @DatabaseField
     private String supervisionType;
 
-    public int getEvidencialNumber() {
+    public Patient() {
+    }
+
+    public Patient(PatientBuilder patientBuilder) {
+    }
+
+    private int getEvidencialNumber() {
         return evidencialNumber;
     }
 
-    public int getPatientAge() {
+    private int getPatientAge() {
         return patientAge;
     }
 
-    public DateTime getRegDate() {
+    private DateTime getRegDate() {
         return regDate;
     }
 
-    public String getAsaFactor() {
+    private String getAsaFactor() {
         return asaFactor;
     }
 
-    public String getTreatmentType() {
+    private String getTreatmentType() {
         return treatmentType;
     }
 
-    public String getAnesthesiaTechnique() {
+    private String getAnesthesiaTechnique() {
         return anesthesiaTechnique;
     }
 
-    public String getSupervisionType() {
+    private String getSupervisionType() {
         return supervisionType;
     }
 
@@ -116,5 +128,4 @@ public class Patient {
             return false;
         return true;
     }
-
 }

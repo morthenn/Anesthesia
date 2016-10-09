@@ -1,4 +1,4 @@
-package dao;
+package patientDao;
 
 import com.j256.ormlite.dao.Dao;
 
