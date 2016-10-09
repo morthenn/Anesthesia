@@ -2,10 +2,8 @@ package model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import patientDao.PatientManager;
+import dao.PatientManager;
 import org.joda.time.DateTime;
-
-import model.types.*;
 
 import java.io.Serializable;
 
@@ -34,6 +32,13 @@ public class Patient implements Serializable {
     }
 
     public Patient(PatientBuilder patientBuilder) {
+        this.evidencialNumber = patientBuilder.evidencialNumber;
+        this.patientAge = patientBuilder.patientAge;
+        this.regDate = patientBuilder.regDate;
+        this.asaFactor = patientBuilder.asaFactor;
+        this.treatmentType = patientBuilder.treatmentType;
+        this.anesthesiaTechnique = patientBuilder.anesthesiaTechnique;
+        this.supervisionType = patientBuilder.supervisionType;
     }
 
     private int getEvidencialNumber() {
@@ -68,10 +73,14 @@ public class Patient implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return sb.append(
-                this.getEvidencialNumber()).append(SEPARATOR).append(this.getRegDate().toString("dd/MM/yyyy"))
+                this.getEvidencialNumber())
+                .append(SEPARATOR).append(this.getRegDate().toString("dd/MM/yyyy"))
                 .append(SEPARATOR).append(this.getAsaFactor())
                 .append(SEPARATOR).append(this.getTreatmentType())
-                .append(SEPARATOR).append(this.getAnesthesiaTechnique()).toString();
+                .append(SEPARATOR).append(this.getAnesthesiaTechnique())
+                .append(SEPARATOR).append(this.getSupervisionType())
+                .append(SEPARATOR).append(this.getPatientAge())
+                .toString();
     }
 
     @Override
@@ -128,4 +137,55 @@ public class Patient implements Serializable {
             return false;
         return true;
     }
+
+    public static class PatientBuilder {
+        private int evidencialNumber;
+        private int patientAge;
+        private DateTime regDate;
+        private String asaFactor;
+        private String treatmentType;
+        private String anesthesiaTechnique;
+        private String supervisionType;
+
+        public PatientBuilder setEvidencialNumber(int evidencialNumber) {
+            this.evidencialNumber = evidencialNumber;
+            return this;
+        }
+
+        public PatientBuilder setPatientAge(int patientAge) {
+            this.patientAge = patientAge;
+            return this;
+        }
+
+        public PatientBuilder setRegDate(DateTime regDate) {
+            this.regDate = regDate;
+            return this;
+        }
+
+        public PatientBuilder setAsaFactor(String asaFactor) {
+            this.asaFactor = asaFactor;
+            return this;
+        }
+
+        public PatientBuilder setTreatmentType(String treatmentType) {
+            this.treatmentType = treatmentType;
+            return this;
+        }
+
+        public PatientBuilder setAnesthesiaTechnique(String anesthesiaTechnique) {
+            this.anesthesiaTechnique = anesthesiaTechnique;
+            return this;
+        }
+
+        public PatientBuilder setSupervisionType(String supervisionType) {
+            this.supervisionType = supervisionType;
+            return this;
+        }
+
+        public Patient build() {
+            return new Patient(this);
+        }
+    }
+
+
 }
