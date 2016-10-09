@@ -9,18 +9,16 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         PatientManager pm = new PatientManager(DatabaseConnection.createConnection());
         pm.addPatient(new Patient.PatientBuilder()
-                .setEvidencialNumber(997)
-                .setPatientAge(17)
+                .setEvidencialNumber(994)
+                .setPatientAge(19)
                 .setAsaFactor("5A")
                 .setRegDate(DateTime.now())
-                .setSupervisionType("bez niczego")
-                .setTreatmentType("mlotkiem w leb")
-                .setAnesthesiaTechnique("kekeke")
+                .setSupervisionType("bez kokoszki")
+                .setTreatmentType("hehehh")
+                .setAnesthesiaTechnique("sobek")
                 .build());
-        for (Object entry : pm.selectAll()){
-            System.out.println(entry);
+        for (Patient entry : pm.selectAll()){
+            System.out.println(entry.getId()+" "+entry);
         }
-
     }
-
 }

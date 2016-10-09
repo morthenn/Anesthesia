@@ -10,8 +10,7 @@ import java.io.Serializable;
 @DatabaseTable(tableName = "patients", daoClass = PatientManager.class)
 public class Patient implements Serializable {
     private static final String SEPARATOR = "\t";
-
-    @DatabaseField(id = true)
+    @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField
     private int evidencialNumber;
@@ -31,7 +30,7 @@ public class Patient implements Serializable {
     public Patient() {
     }
 
-    public Patient(PatientBuilder patientBuilder) {
+    private Patient(PatientBuilder patientBuilder) {
         this.evidencialNumber = patientBuilder.evidencialNumber;
         this.patientAge = patientBuilder.patientAge;
         this.regDate = patientBuilder.regDate;
@@ -39,6 +38,11 @@ public class Patient implements Serializable {
         this.treatmentType = patientBuilder.treatmentType;
         this.anesthesiaTechnique = patientBuilder.anesthesiaTechnique;
         this.supervisionType = patientBuilder.supervisionType;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     private int getEvidencialNumber() {
@@ -71,16 +75,14 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(
-                this.getEvidencialNumber())
-                .append(SEPARATOR).append(this.getRegDate().toString("dd/MM/yyyy"))
-                .append(SEPARATOR).append(this.getAsaFactor())
-                .append(SEPARATOR).append(this.getTreatmentType())
-                .append(SEPARATOR).append(this.getAnesthesiaTechnique())
-                .append(SEPARATOR).append(this.getSupervisionType())
-                .append(SEPARATOR).append(this.getPatientAge())
-                .toString();
+        return String.valueOf(this.getEvidencialNumber()) +
+                SEPARATOR + this.getRegDate().toString("dd/MM/yyyy") +
+                SEPARATOR + this.getAsaFactor() +
+                SEPARATOR + this.getTreatmentType() +
+                SEPARATOR + this.getAnesthesiaTechnique() +
+                SEPARATOR + this.getSupervisionType() +
+                SEPARATOR + this.getPatientAge();
+
     }
 
     @Override
