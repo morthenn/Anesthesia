@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>List Posts</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <entry th:each="patient : ${patients}">
+
+       <p>patient</p>
+
+    </entry>
+
+</div>
+
+</body>
+</html>
