@@ -12,11 +12,9 @@
 
     <entry th:each="patient : ${patients}">
 
-       <p>patient</p>
+       <p th:text="${patient.toString()}"/>
 
     </entry>
-
 </div>
-
 </body>
 </html>
