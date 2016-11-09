@@ -1,4 +1,4 @@
-package pl.michalgubanski.controllers;
+package pl.michalgubanski.controller;
 
 /**
  * Created by U6041021 on 07/11/2016.

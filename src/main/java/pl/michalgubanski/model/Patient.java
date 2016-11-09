@@ -1,10 +1,13 @@
 package pl.michalgubanski.model;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Patient {
@@ -15,7 +18,9 @@ public class Patient {
     private int id;
     private int evidencialNumber;
     private int patientAge;
-    private DateTime regDate;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private Date registeredDate;
     private String asaFactor;
     private String treatmentType;
     private String anesthesiaTechnique;
@@ -23,17 +28,6 @@ public class Patient {
 
     public Patient() {
     }
-
-    private Patient(PatientBuilder patientBuilder) {
-        this.evidencialNumber = patientBuilder.evidencialNumber;
-        this.patientAge = patientBuilder.patientAge;
-        this.regDate = patientBuilder.regDate;
-        this.asaFactor = patientBuilder.asaFactor;
-        this.treatmentType = patientBuilder.treatmentType;
-        this.anesthesiaTechnique = patientBuilder.anesthesiaTechnique;
-        this.supervisionType = patientBuilder.supervisionType;
-    }
-
 
     public int getId() {
         return id;
@@ -47,8 +41,8 @@ public class Patient {
         return patientAge;
     }
 
-    private DateTime getRegDate() {
-        return regDate;
+    private Date getRegisteredDate() {
+        return registeredDate;
     }
 
     private String getAsaFactor() {
@@ -67,10 +61,38 @@ public class Patient {
         return supervisionType;
     }
 
+    public void setEvidencialNumber(int evidencialNumber) {
+        this.evidencialNumber = evidencialNumber;
+    }
+
+    public void setPatientAge(int patientAge) {
+        this.patientAge = patientAge;
+    }
+
+    public void setRegisteredDate(Date registeredDate) {
+        this.registeredDate = registeredDate;
+    }
+
+    public void setAsaFactor(String asaFactor) {
+        this.asaFactor = asaFactor;
+    }
+
+    public void setTreatmentType(String treatmentType) {
+        this.treatmentType = treatmentType;
+    }
+
+    public void setAnesthesiaTechnique(String anesthesiaTechnique) {
+        this.anesthesiaTechnique = anesthesiaTechnique;
+    }
+
+    public void setSupervisionType(String supervisionType) {
+        this.supervisionType = supervisionType;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.getEvidencialNumber()) +
-                SEPARATOR + this.getRegDate().toString("dd/MM/yyyy") +
+                SEPARATOR + this.getRegisteredDate().toString() +
                 SEPARATOR + this.getAsaFactor() +
                 SEPARATOR + this.getTreatmentType() +
                 SEPARATOR + this.getAnesthesiaTechnique() +
@@ -78,55 +100,4 @@ public class Patient {
                 SEPARATOR + this.getPatientAge();
 
     }
-
-       public static class PatientBuilder {
-        private int evidencialNumber;
-        private int patientAge;
-        private DateTime regDate;
-        private String asaFactor;
-        private String treatmentType;
-        private String anesthesiaTechnique;
-        private String supervisionType;
-
-        public PatientBuilder setEvidencialNumber(int evidencialNumber) {
-            this.evidencialNumber = evidencialNumber;
-            return this;
-        }
-
-        public PatientBuilder setPatientAge(int patientAge) {
-            this.patientAge = patientAge;
-            return this;
-        }
-
-        public PatientBuilder setRegDate(DateTime regDate) {
-            this.regDate = regDate;
-            return this;
-        }
-
-        public PatientBuilder setAsaFactor(String asaFactor) {
-            this.asaFactor = asaFactor;
-            return this;
-        }
-
-        public PatientBuilder setTreatmentType(String treatmentType) {
-            this.treatmentType = treatmentType;
-            return this;
-        }
-
-        public PatientBuilder setAnesthesiaTechnique(String anesthesiaTechnique) {
-            this.anesthesiaTechnique = anesthesiaTechnique;
-            return this;
-        }
-
-        public PatientBuilder setSupervisionType(String supervisionType) {
-            this.supervisionType = supervisionType;
-            return this;
-        }
-
-        public Patient build() {
-            return new Patient(this);
-        }
-    }
-
-
 }

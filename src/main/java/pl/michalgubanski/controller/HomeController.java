@@ -1,8 +1,7 @@
-package pl.michalgubanski.controllers;
+package pl.michalgubanski.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by U6041021 on 07/11/2016.
