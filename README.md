@@ -1,2 +1,3 @@
 # Anesthesia
-Simple Android documentary management with ability to export reports as XLS files
+
+Simple patient manager for anesthesiologists with the use of Spring boot, Hiberrnate, thymeleaf
