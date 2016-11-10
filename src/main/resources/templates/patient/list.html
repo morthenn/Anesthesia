@@ -8,33 +8,35 @@
 <body>
 
 <div layout:fragment="content">
-
-    <table border="1" style="width:100%; border-style:solid; border-width:2px; border-color: #c3d2d9; text-align:center;" >
-        <tr>
-            <th>evidential number</th>
-            <th>age</th>
-            <th>date</th>
-            <th>asa</th>
-            <th>treatment type</th>
-            <th>anesthesia technique</th>
-            <th>supervision type</th>
-        </tr>
-        <entry th:each="patient : ${patients}">
-            <tr class='clickable-row' data-href='http://www.google.com'>
-                <td th:text="${patient.evidentialNumber}">s</td>
-                <td th:text="${patient.patientAge}"></td>
-                <td th:text="${patient.registeredDate}"></td>
-                <td th:text="${patient.asaFactor}"></td>
-                <td th:text="${patient.treatmentType}"></td>
-                <td th:text="${patient.anesthesiaTechnique}"></td>
-                <td th:text="${patient.supervisionType}"></td>
+    <div class="container">
+        <h2>Patients</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>EvidentialNo</th>
+                <th>Age</th>
+                <th>Date</th>
+                <th>Asa</th>
+                <th>Treatment type</th>
+                <th>Anesthesia technique</th>
+                <th>Supervision type</th>
             </tr>
-        </entry>
-    </table>
+            </thead>
+            <tbody>
+            <entry th:each="patient : ${patients}">
+                <tr class='clickable-row' data-href='http://www.google.com'>
+                    <td th:text="${patient.evidentialNumber}">s</td>
+                    <td th:text="${patient.patientAge}"></td>
+                    <td th:text="${patient.registeredDate}"></td>
+                    <td th:text="${patient.asaFactor}"></td>
+                    <td th:text="${patient.treatmentType}"></td>
+                    <td th:text="${patient.anesthesiaTechnique}"></td>
+                    <td th:text="${patient.supervisionType}"></td>
+                </tr>
+            </entry>
+            </tbody>
+        </table>
+    </div>
 </div>
-<script>
-    $(function() {$(".clickableRow").on("click", function() { location.href="http://google.com";})});
-
-</script>
 </body>
 </html>

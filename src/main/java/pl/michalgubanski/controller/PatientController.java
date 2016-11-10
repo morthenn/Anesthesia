@@ -23,8 +23,8 @@ public class PatientController {
     }
 
     @RequestMapping("/view/{evidencialNumber}")
-    public String patient(@PathVariable(value = "evidencialNumber") String evidencialNumber, Model model) {
-        model.addAttribute("patient", patientService.getByEvidentialNumber());
+    public String patient(@PathVariable(value = "evidencialNumber") String evidentialNumber, Model model) {
+        model.addAttribute("patient", patientService.getByEvidentialNumber(evidentialNumber));
         return "patient/view";
     }
 
@@ -35,8 +35,7 @@ public class PatientController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String patientsAdd(@ModelAttribute Patient patient) {
-
+    public String patientsAdd(Patient patient) {
         patientService.addPatient(patient);
         return "/patient/list";
     }

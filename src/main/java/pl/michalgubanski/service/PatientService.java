@@ -20,7 +20,7 @@ public class PatientService {
         return patientRepository.findAllByOrderByRegisteredDate();
     }
 
-    public Patient getByEvidentialNumber() {
+    public Patient getByEvidentialNumber(String evidentialNumber) {
         return patientRepository.findFirstByOrderByEvidentialNumber();
     }
 
