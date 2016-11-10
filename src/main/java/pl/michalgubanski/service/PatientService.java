@@ -17,10 +17,14 @@ public class PatientService {
     private PatientRepository patientRepository;
 
     public List<Patient> list() {
-       return patientRepository.findAllByOrderByRegisteredDate();
+        return patientRepository.findAllByOrderByRegisteredDate();
     }
 
-    public Patient getByEvidencialNumber() {
-        return patientRepository.findFirstByOrderByEvidencialNumber();
+    public Patient getByEvidentialNumber() {
+        return patientRepository.findFirstByOrderByEvidentialNumber();
+    }
+
+    public Patient addPatient(Patient newPatient) {
+        return patientRepository.save(newPatient);
     }
 }

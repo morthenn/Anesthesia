@@ -1,8 +1,5 @@
 package pl.michalgubanski.model;
 
-import org.joda.time.DateTime;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +13,7 @@ public class Patient {
     @Id
     @GeneratedValue
     private int id;
-    private int evidencialNumber;
+    private int evidentialNumber;
     private int patientAge;
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -33,36 +30,36 @@ public class Patient {
         return id;
     }
 
-    private int getEvidencialNumber() {
-        return evidencialNumber;
+    public int getEvidentialNumber() {
+        return evidentialNumber;
     }
 
-    private int getPatientAge() {
+    public int getPatientAge() {
         return patientAge;
     }
 
-    private Date getRegisteredDate() {
+    public Date getRegisteredDate() {
         return registeredDate;
     }
 
-    private String getAsaFactor() {
+    public String getAsaFactor() {
         return asaFactor;
     }
 
-    private String getTreatmentType() {
+    public String getTreatmentType() {
         return treatmentType;
     }
 
-    private String getAnesthesiaTechnique() {
+    public String getAnesthesiaTechnique() {
         return anesthesiaTechnique;
     }
 
-    private String getSupervisionType() {
+    public String getSupervisionType() {
         return supervisionType;
     }
 
-    public void setEvidencialNumber(int evidencialNumber) {
-        this.evidencialNumber = evidencialNumber;
+    public void setEvidentialNumber(int evidentialNumber) {
+        this.evidentialNumber = evidentialNumber;
     }
 
     public void setPatientAge(int patientAge) {
@@ -91,7 +88,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return String.valueOf(this.getEvidencialNumber()) +
+        return String.valueOf(this.getEvidentialNumber()) +
                 SEPARATOR + this.getRegisteredDate().toString() +
                 SEPARATOR + this.getAsaFactor() +
                 SEPARATOR + this.getTreatmentType() +

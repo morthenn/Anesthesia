@@ -14,5 +14,5 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<Patient, Long>{
 
     List<Patient> findAllByOrderByRegisteredDate();
-    Patient findFirstByOrderByEvidencialNumber();
+    Patient findFirstByOrderByEvidentialNumber();
 }

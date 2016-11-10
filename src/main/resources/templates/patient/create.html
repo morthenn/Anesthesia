@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Create Patient</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <form th:action="@{/patients/create}" th:object="${patient}" method="post">
+        <div>
+            Evidential No: <input th:field="*{evidentialNumber}" name="evidentialNumber"/>
+        </div>
+        <div>
+            Age: <input th:field="*{patientAge}" name="patientAge"/>
+        </div>
+        <!--<div>-->
+            <!--Date: <input th:field="*{registeredDate}" name="registeredDate"/>-->
+        <!--</div>-->
+        <div>
+            ASA: <input th:field="*{asaFactor}" name="asaFactor"/>
+        </div>
+        <div>
+            Treatment: <input th:field="*{treatmentType}" name="treatmentType"/>
+        </div>
+        <div>
+            Anesthesia: <input th:field="*{anesthesiaTechnique}" name="anesthesiaTechnique"/>
+        </div>
+        <div>
+            Supervision Type: <input th:field="*{supervisionType}" name="supervisionType"/>
+        </div>
+        <div>
+            <input type="submit" value="Add patient" name="button"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
