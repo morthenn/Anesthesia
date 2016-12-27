@@ -8,33 +8,80 @@
 <body>
 
 <div layout:fragment="content">
-
-    <form th:action="@{/patients/create}" th:object="${patient}" method="post">
-        <div>
-            Evidential No: <input th:field="*{evidentialNumber}" name="evidentialNumber"/>
+    <form class="form-container" th:action="@{/patients/create}" th:object="${patient}" method="post">
+        <div class="form-title"><h2>Add patient</h2></div>
+        --
+        <div class="form-title">Evidential No:
+            <input class="form-field" type="text" th:field="*{evidentialNumber}" name="evidentialNumber"/><br/>
         </div>
-        <div>
-            Age: <input th:field="*{patientAge}" name="patientAge"/>
+        --
+        <div class="form-title">Age:
+            <input class="form-field" type="text" th:field="*{patientAge}" name="patientAge"/><br/>
         </div>
-        <!--<div>-->
-            <!--Date: <input th:field="*{registeredDate}" name="registeredDate"/>-->
-        <!--</div>-->
-        <div>
-            ASA: <input th:field="*{asaFactor}" name="asaFactor"/>
+        --
+        <!--&#45;&#45;ASA-->
+        <div class="form-title"> ASA:
+            <select id="asaFactor" th:field="*{asaFactor}" name="asaFactor">
+                <option th:each="type : ${asaList}"
+                        th:value="${type}"
+                        th:text="${type.getFieldDescription()}">
+                </option>
+            </select>
         </div>
-        <div>
-            Treatment: <input th:field="*{treatmentType}" name="treatmentType"/>
+        --
+        <!--&#45;&#45;TECHNIQUE-->
+        <div class="form-title">Technique: </div>
+        <div th:each="anesthesia : ${anesthesiaList}">
+            <input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}"
+                   th:field="*{anesthesiaTechnique}"/>
+            <label th:text="${anesthesia}">Technique</label>
         </div>
-        <div>
-            Anesthesia: <input th:field="*{anesthesiaTechnique}" name="anesthesiaTechnique"/>
+        --
+        <div class="form-title">Supervision: </div>
+        <div th:each="supervision : ${supervisionList}">
+            <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
+                   th:field="*{supervisionType}"/>
+            <label th:text="${supervision}">Supervision</label>
         </div>
-        <div>
-            Supervision Type: <input th:field="*{supervisionType}" name="supervisionType"/>
+        --
+        <div class="form-title">
+            Description: <input th:field="*{treatmentType}" name="treatmentType"/>
         </div>
-        <div>
-            <input type="submit" value="Add patient" name="button"/>
+        --
+        <div class="form-title">Email
+            <input class="form-field" type="text" name="email"/><br/>
+        </div>
+        --
+        <div class="submit-container">
+            <input class="submit-button" type="submit" value="Submit"/>
         </div>
     </form>
+    <!--<form th:action="@{/patients/create}" th:object="${patient}" method="post">-->
+    <!--<div>-->
+    <!--Evidential No: <input th:field="*{evidentialNumber}" name="evidentialNumber"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--Age: <input th:field="*{patientAge}" name="patientAge"/>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<div>&ndash;&gt;-->
+    <!--&lt;!&ndash;Date: <input th:field="*{registeredDate}" name="registeredDate"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--<div>-->
+    <!--ASA: <input th:field="*{asaFactor}" name="asaFactor"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--Treatment: <input th:field="*{treatmentType}" name="treatmentType"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--Anesthesia: <input th:field="*{anesthesiaTechnique}" name="anesthesiaTechnique"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--Supervision Type: <input th:field="*{supervisionType}" name="supervisionType"/>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<input type="submit" value="Add patient" name="button"/>-->
+    <!--</div>-->
+    <!--</form>-->
 </div>
 </body>
 </html>

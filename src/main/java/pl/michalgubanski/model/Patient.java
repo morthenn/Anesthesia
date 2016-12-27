@@ -1,9 +1,15 @@
 package pl.michalgubanski.model;
 
+import pl.michalgubanski.model.types.AsaFactor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -13,14 +19,27 @@ public class Patient {
     @Id
     @GeneratedValue
     private int id;
+    @NotNull
     private int evidentialNumber;
+
+    @NotNull
+    @Min(0)
+    @Max(110)
     private int patientAge;
 
     @Column(columnDefinition = "TIMESTAMP")
     private Date registeredDate;
+
+    @NotNull
     private String asaFactor;
+
+    @Size(max = 255)
     private String treatmentType;
+
+    @NotNull
     private String anesthesiaTechnique;
+
+    @NotNull
     private String supervisionType;
 
     public Patient() {
@@ -70,8 +89,8 @@ public class Patient {
         this.registeredDate = registeredDate;
     }
 
-    public void setAsaFactor(String asaFactor) {
-        this.asaFactor = asaFactor;
+    public void setAsaFactor(AsaFactor asaFactor) {
+        this.asaFactor = asaFactor.getFieldDescription();
     }
 
     public void setTreatmentType(String treatmentType) {

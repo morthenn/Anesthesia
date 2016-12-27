@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.michalgubanski.model.Patient;
+import pl.michalgubanski.model.types.AnesthesiaTechnique;
+import pl.michalgubanski.model.types.AsaFactor;
+import pl.michalgubanski.model.types.SupervisionType;
 import pl.michalgubanski.service.PatientService;
 
 @Controller
@@ -31,12 +34,16 @@ public class PatientController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String patientCreation(Model model) {
         model.addAttribute("patient", new Patient());
+        model.addAttribute("asaList", AsaFactor.getValues());
+        model.addAttribute("supervisionList", SupervisionType.getValues());
+        model.addAttribute("anesthesiaList", AnesthesiaTechnique.getValues());
         return "patient/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String patientsAdd(Patient patient) {
         patientService.addPatient(patient);
+        log.info("Patient id={} created", patient.getId());
         return "/patient/list";
     }
 
