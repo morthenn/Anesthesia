@@ -30,14 +30,15 @@
         </div>
         --
         <!--&#45;&#45;TECHNIQUE-->
-        <div class="form-title">Technique: </div>
+        <div class="form-title">Technique:</div>
         <div th:each="anesthesia : ${anesthesiaList}">
             <input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}"
                    th:field="*{anesthesiaTechnique}"/>
             <label th:text="${anesthesia}">Technique</label>
         </div>
         --
-        <div class="form-title">Supervision: </div>
+        <!--&#45;&#45;SUPERVISION-->
+        <div class="form-title">Supervision:</div>
         <div th:each="supervision : ${supervisionList}">
             <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
                    th:field="*{supervisionType}"/>
@@ -48,40 +49,10 @@
             Description: <input th:field="*{treatmentType}" name="treatmentType"/>
         </div>
         --
-        <div class="form-title">Email
-            <input class="form-field" type="text" name="email"/><br/>
-        </div>
-        --
         <div class="submit-container">
-            <input class="submit-button" type="submit" value="Submit"/>
+            <input class="submit-button" type="submit" value="Dodaj"/>
         </div>
     </form>
-    <!--<form th:action="@{/patients/create}" th:object="${patient}" method="post">-->
-    <!--<div>-->
-    <!--Evidential No: <input th:field="*{evidentialNumber}" name="evidentialNumber"/>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--Age: <input th:field="*{patientAge}" name="patientAge"/>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div>&ndash;&gt;-->
-    <!--&lt;!&ndash;Date: <input th:field="*{registeredDate}" name="registeredDate"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--<div>-->
-    <!--ASA: <input th:field="*{asaFactor}" name="asaFactor"/>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--Treatment: <input th:field="*{treatmentType}" name="treatmentType"/>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--Anesthesia: <input th:field="*{anesthesiaTechnique}" name="anesthesiaTechnique"/>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--Supervision Type: <input th:field="*{supervisionType}" name="supervisionType"/>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<input type="submit" value="Add patient" name="button"/>-->
-    <!--</div>-->
-    <!--</form>-->
 </div>
 </body>
 </html>

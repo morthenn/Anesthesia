@@ -1,7 +1,5 @@
 package pl.michalgubanski.model.types;
 
-import java.util.Arrays;
-import java.util.List;
 
 public enum AsaFactor {
     ONE("1"), ONE_E("1E"),
@@ -11,7 +9,6 @@ public enum AsaFactor {
     FIVE("5"), FIVE_E("5E");
 
     private String fieldDescription;
-    private static final List<AsaFactor> values = Arrays.asList(values());
 
     AsaFactor(String value) {
         fieldDescription = value;
@@ -19,10 +16,6 @@ public enum AsaFactor {
 
     public String getFieldDescription() {
         return fieldDescription;
-    }
-
-    public static List<AsaFactor> getValues() {
-        return values;
     }
 
 }

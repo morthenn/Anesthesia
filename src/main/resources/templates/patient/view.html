@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+      layout:decorator="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title th:text="|View Post - ${post.title}|">View Post</title>
+    <title th:text="|View Post - ${patient.evidentialNumber}|">View Post</title>
 </head>
 <body>
 
@@ -11,24 +11,17 @@
 
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
-        <li><a href="/posts/list">Posts</a></li>
-        <li class="active" th:text="${post.title}"></li>
+        <li><a href="/patients/list">Patients</a></li>
+        <li class="active" th:text="${patient.evidentialNumber}"></li>
     </ol>
 
     <article>
         <header>
-            <h2 th:text="${post.title}">title</h2>
-            <p th:text="${#calendars.format(post.postedOn,'M/dd/yyyy hh:mm a')}">postedOn</p>
+            <h2 th:text="${patient.supervisionType}">title</h2>
+            <p th:text="${#calendars.format(patient.registeredDate,'M/dd/yyyy hh:mm:ss')}">postedOn</p>
         </header>
-        <section th:utext="${post.body}">
-
+        <section th:utext="${patient.treatmentType}">
         </section>
-        <footer>
-            <address>
-                Posted By <a th:href="|mailto:${post.author.email}|"> <span th:text="|${post.author.firstName} ${post.author.lastName}|">author</span></a>
-            </address>
-        </footer>
-        <hr/>
     </article>
 
 </div>

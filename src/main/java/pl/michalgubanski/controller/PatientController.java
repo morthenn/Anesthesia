@@ -16,27 +16,34 @@ import pl.michalgubanski.service.PatientService;
 @RequestMapping("/patients")
 public class PatientController {
     private static final Logger log = LoggerFactory.getLogger(PatientController.class);
+
     @Autowired
     private PatientService patientService;
 
     @RequestMapping("/list")
     public String listPatients(Model model) {
-        model.addAttribute("patients", patientService.list());
+        model.addAttribute("patients", patientService.listByEvidentialNumber());
         return "patient/list";
     }
 
-    @RequestMapping("/view/{evidencialNumber}")
-    public String patient(@PathVariable(value = "evidencialNumber") String evidentialNumber, Model model) {
+    /**
+     * TODO BUG. It shows only one specific patient, even when changing evNo
+     */
+    @RequestMapping(value = "/view/{evidentialNumber}", method = RequestMethod.GET)
+    public @ResponseBody String patient(@PathVariable(value = "evidentialNumber") String evidentialNumber, Model model) {
         model.addAttribute("patient", patientService.getByEvidentialNumber(evidentialNumber));
         return "patient/view";
     }
 
+    /**
+     * TODO Devidential number duplicates handling
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String patientCreation(Model model) {
         model.addAttribute("patient", new Patient());
-        model.addAttribute("asaList", AsaFactor.getValues());
-        model.addAttribute("supervisionList", SupervisionType.getValues());
-        model.addAttribute("anesthesiaList", AnesthesiaTechnique.getValues());
+        model.addAttribute("asaList", AsaFactor.values());
+        model.addAttribute("supervisionList", SupervisionType.values());
+        model.addAttribute("anesthesiaList", AnesthesiaTechnique.values());
         return "patient/create";
     }
 
@@ -44,7 +51,7 @@ public class PatientController {
     public String patientsAdd(Patient patient) {
         patientService.addPatient(patient);
         log.info("Patient id={} created", patient.getId());
-        return "/patient/list";
+        return "redirect:/patients/list";
     }
 
 }

@@ -16,8 +16,14 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public List<Patient> list() {
+    public List<Patient> listByDate() {
         return patientRepository.findAllByOrderByRegisteredDate();
+    }
+    public List<Patient> listById() {
+        return patientRepository.findAllByOrderById();
+    }
+    public List<Patient> listByEvidentialNumber() {
+        return patientRepository.findAllByOrderByEvidentialNumberDesc();
     }
 
     public Patient getByEvidentialNumber(String evidentialNumber) {

@@ -19,6 +19,7 @@ public class Patient {
     @Id
     @GeneratedValue
     private int id;
+
     @NotNull
     private int evidentialNumber;
 
