@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "patientList")
+@Table(name = "patients")
 public class Patient {
     private static final String SEPARATOR = "\t";
 
