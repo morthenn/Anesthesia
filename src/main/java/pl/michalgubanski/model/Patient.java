@@ -10,12 +10,12 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "patients")
+@Table(name = "patientList")
 public class Patient {
     private static final String SEPARATOR = "\t";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull
