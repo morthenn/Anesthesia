@@ -26,8 +26,8 @@ public class PatientService {
         return patientRepository.findAllByOrderByEvidentialNumberDesc();
     }
 
-    public Patient getByEvidentialNumber(String evidentialNumber) {
-        return patientRepository.findFirstByOrderByEvidentialNumber();
+    public Patient getByEvidentialNumber(Integer evidentialNumber) {
+        return patientRepository.findByEvidentialNumber(evidentialNumber);
     }
 
     public Patient addPatient(Patient newPatient) {
