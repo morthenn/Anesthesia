@@ -16,5 +16,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long>{
     List<Patient> findAllByOrderByRegisteredDate();
     List<Patient> findAllByOrderById();
     List<Patient> findAllByOrderByEvidentialNumberDesc();
-    Patient findFirstByOrderByEvidentialNumber();
+    Patient findFirstByEvidentialNumber();
 }
