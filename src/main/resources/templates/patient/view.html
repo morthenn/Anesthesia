@@ -18,6 +18,7 @@
     <article>
         <header>
             <h2 th:text="${patient.supervisionType}">title</h2>
+            <h2 th:text="${patient.evidentialNumber}">title</h2>
             <p th:text="${#calendars.format(patient.registeredDate,'M/dd/yyyy hh:mm:ss')}">postedOn</p>
         </header>
         <section th:utext="${patient.treatmentType}">
