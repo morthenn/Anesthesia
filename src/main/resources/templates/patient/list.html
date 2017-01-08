@@ -4,6 +4,11 @@
       layout:decorator="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>List Posts</title>
+    <script type="text/javascript">
+    function rowClicked(value) {
+        location.href = "/patients/view/" + value;
+    }
+</script>
 </head>
 <body>
 
@@ -24,7 +29,7 @@
             </thead>
             <tbody>
             <entry th:each="patient : ${patients}">
-                <tr class='clickable-row' data-href='http://www.google.com'>
+                <tr style="cursor: pointer" th:onclick="'javascript:rowClicked(\'' + ${patient.evidentialNumber} + '\');'">
                     <td th:text="${patient.evidentialNumber}">s</td>
                     <td th:text="${patient.patientAge}"></td>
                     <td th:text="${patient.registeredDate}"></td>
