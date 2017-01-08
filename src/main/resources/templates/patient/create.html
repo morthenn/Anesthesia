@@ -3,56 +3,156 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create Patient</title>
+    <title>Dodawanie pacjenta</title>
 </head>
 <body>
 
 <div layout:fragment="content">
-    <form class="form-container" th:action="@{/patients/create}" th:object="${patient}" method="post">
-        <div class="form-title"><h2>Add patient</h2></div>
-        --
-        <div class="form-title">Evidential No:
-            <input class="form-field" type="text" th:field="*{evidentialNumber}" name="evidentialNumber"/><br/>
-        </div>
-        --
-        <div class="form-title">Age:
-            <input class="form-field" type="text" th:field="*{patientAge}" name="patientAge"/><br/>
-        </div>
-        --
-        <!--&#45;&#45;ASA-->
-        <div class="form-title"> ASA:
-            <select id="asaFactor" th:field="*{asaFactor}" name="asaFactor">
-                <option th:each="type : ${asaList}"
-                        th:value="${type}"
-                        th:text="${type.getFieldDescription()}">
-                </option>
-            </select>
-        </div>
-        --
-        <!--&#45;&#45;TECHNIQUE-->
-        <div class="form-title">Technique:</div>
-        <div th:each="anesthesia : ${anesthesiaList}">
-            <input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}"
-                   th:field="*{anesthesiaTechnique}"/>
-            <label th:text="${anesthesia}">Technique</label>
-        </div>
-        --
-        <!--&#45;&#45;SUPERVISION-->
-        <div class="form-title">Supervision:</div>
-        <div th:each="supervision : ${supervisionList}">
-            <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
-                   th:field="*{supervisionType}"/>
-            <label th:text="${supervision}">Supervision</label>
-        </div>
-        --
-        <div class="form-title">
-            Description: <input th:field="*{treatmentType}" name="treatmentType"/>
-        </div>
-        --
-        <div class="submit-container">
-            <input class="submit-button" type="submit" value="Dodaj"/>
-        </div>
-    </form>
-</div>
+
+    <div class="container">
+
+        <form class="well form-horizontal" th:action="@{/patients/create}" th:object="${patient}" method="post" id="contact_form">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend><h1>Dodaj pacjenta do bazy</h1></legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nr. ewidencyjny</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                            <input placeholder="numer" class="form-control" type="number" th:field="*{evidentialNumber}" name="evidentialNumber"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Wiek</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-hourglass"></i></span>
+                            <input placeholder="wiek" class="form-control" type="number" th:field="*{patientAge}" name="patientAge"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ASA</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select class="form-control selectpicker" th:field="*{asaFactor}" name="asaFactor">
+                                <option th:each="type : ${asaList}" th:value="${type}" th:text="${type.getFieldDescription()}" value=" ">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- radio checks -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Technika</label>
+                    <div class="col-md-4" >
+                        <div class="radio" th:each="anesthesia : ${anesthesiaList}">
+                            <input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}" th:field="*{anesthesiaTechnique}"/>
+                            <label th:text="${anesthesia}"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nadzór</label>
+                    <div class="col-md-4" >
+                        <div class="radio" th:each="supervision : ${supervisionList}">
+                            <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
+                                   th:field="*{supervisionType}"/>
+                            <label th:text="${supervision}"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text area -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Rodzaj zabiegu</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <textarea class="form-control" th:field="*{treatmentType}" name="treatmentType"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success message -->
+                <div class="alert alert-success" role="alert" id="success_message">Sukces. <i
+                        class="glyphicon glyphicon-thumbs-up"></i> Pacjent dodany pomyslnie
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning">Send <span
+                                class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+
+<!--<form class="form-container" th:action="@{/patients/create}" th:object="${patient}" method="post">-->
+    <!--<div class="form-title"><h2>Add patient</h2></div>-->
+    <!--&#45;&#45;-->
+    <!--<div class="form-title">Evidential No:-->
+        <!--<input class="form-field" type="text" th:field="*{evidentialNumber}" name="evidentialNumber"/><br/>-->
+    <!--</div>-->
+    <!--&#45;&#45;-->
+    <!--<div class="form-title">Age:-->
+        <!--<input class="form-field" type="text" th:field="*{patientAge}" name="patientAge"/><br/>-->
+    <!--</div>-->
+    <!--&#45;&#45;-->
+    <!--&lt;!&ndash;&#45;&#45;ASA&ndash;&gt;-->
+    <!--<div class="form-title"> ASA:-->
+        <!--<select id="asaFactor" th:field="*{asaFactor}" name="asaFactor">-->
+            <!--<option th:each="type : ${asaList}"-->
+                    <!--th:value="${type}"-->
+                    <!--th:text="${type.getFieldDescription()}">-->
+            <!--</option>-->
+        <!--</select>-->
+    <!--</div>-->
+    <!--&#45;&#45;-->
+    <!--&lt;!&ndash;&#45;&#45;TECHNIQUE&ndash;&gt;-->
+    <!--<div class="form-title">Technique:</div>-->
+    <!--<div th:each="anesthesia : ${anesthesiaList}">-->
+        <!--<input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}"-->
+               <!--th:field="*{anesthesiaTechnique}"/>-->
+        <!--<label th:text="${anesthesia}">Technique</label>-->
+    <!--</div>-->
+    <!--&#45;&#45;-->
+    <!--&lt;!&ndash;&#45;&#45;SUPERVISION&ndash;&gt;-->
+    <!--<div class="form-title">Supervision:</div>-->
+    <div th:each="supervision : ${supervisionList}">
+        <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
+               th:field="*{supervisionType}"/>
+        <label th:text="${supervision}">Supervision</label>
+    </div>
+    <!--&#45;&#45;-->
+    <!--<div class="form-title">-->
+        <!--Description: <input th:field="*{treatmentType}" name="treatmentType"/>-->
+    <!--</div>-->
+    <!--&#45;&#45;-->
+    <!--<div class="submit-container">-->
+        <!--<input class="submit-button" type="submit" value="Dodaj"/>-->
+    <!--</div>-->
+<!--</form>-->
+<!--</div>-->
 </body>
 </html>
