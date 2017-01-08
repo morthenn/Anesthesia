@@ -22,29 +22,25 @@
     <![endif]-->
 </head>
 <body>
+
+
+
 <div class="container">
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container-fluid" id="navfluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">anesthesia.com</a>
-        </div>
-        <div class="navbar-collapse collapse" id="navigationbar">
-            <ul class="nav navbar-nav" role="menu">
-                <div class="dropdown-backdrop">
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                        Patients <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/patients/list">List Patients</a></li>
-                        <li><a href="/patients/create">Add Patient</a></li>
-                    </ul>
-                </li>
-                </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Kajanesthesia</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="/patients/list">Patient List</a></li>
+                <li><a href="/patients/create">Add patient</a></li>
             </ul>
-            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Guest User</a></p>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Signed in as Guest User</a></li>
+            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <div layout:fragment="content">
 </div>
