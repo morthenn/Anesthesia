@@ -5,11 +5,11 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>The Real Majki</title>
 
-    <link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}"/>
-    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'/>
 
@@ -24,35 +24,26 @@
 <body>
 
 <div class="container">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+        <div class="container-fluid" id="navfluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">anesthesia.com</a>
+                <a class="navbar-brand" href="/">kajanesthesia</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div id="navigationbar">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Patients <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/patients/list">List Patients</a></li>
-                            <li><a href="/patients/create">Add Patient</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/patients/list">Patients</a></li>
+                    <li><a href="/patients/create">Add Patient</a></li>
                 </ul>
-                <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Guest User</a></p>
-            </div>
-        </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
 
-    <div layout:fragment="content">
-    </div>
-
-    <footer>
-        <p>Copyright Michal Gubanienkov</p>
-    </footer>
-
+<div layout:fragment="content">
 </div>
 
+<footer>
+    <p>Copyright Michal Gubanienkov</p>
+</footer>
+</div>
 </body>
 </html>
