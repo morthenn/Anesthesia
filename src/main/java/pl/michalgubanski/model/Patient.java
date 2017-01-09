@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "patients")
+//@Table(name = "patients")
 public class Patient {
     private static final String SEPARATOR = "\t";
 
@@ -19,6 +19,7 @@ public class Patient {
     private int id;
 
     @NotNull
+    @Min(1)
     private int evidentialNumber;
 
     @NotNull

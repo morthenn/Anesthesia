@@ -5,25 +5,24 @@
 <head>
     <title>Dodawanie pacjenta</title>
     <link href="../../static/css/validator.css" th:href="@{/css/validator.css}" rel="stylesheet"/>
-    <script src="../../static/js/form-validator.js" th:src ="@{/js/form-validator.js}"></script>
+    <script src="../../static/js/form-validator.js" th:src="@{/js/form-validator.js}"></script>
 </head>
 <body>
 
 <div layout:fragment="content">
 
     <div class="container">
-
         <form class="well form-horizontal" th:action="@{/patients/create}" th:object="${patient}" method="post"
               id="contact_form">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend><h1>Dodaj pacjenta</h1></legend>
+                <legend>Dodaj pacjenta do bazy danych</legend>
 
                 <!--&lt;!&ndash; Data&ndash;&gt;-->
                 <!--<div class="input-group date">-->
-                    <!--<input type="text" class="form-control" th:field="*{registeredDate}" name="registeredDate"/><span-->
-                        <!--class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>-->
+                <!--<input type="text" class="form-control" th:field="*{registeredDate}" name="registeredDate"/><span-->
+                <!--class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>-->
                 <!--</div>-->
                 <!-- Nr ewidencyjny-->
                 <div class="form-group">
@@ -31,8 +30,9 @@
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                            <input placeholder="numer" class="form-control" type="number" th:field="*{evidentialNumber}"
-                                   name="evidentialNumber"/>
+                            <input placeholder="numer" class="form-control" type="number"
+                                   th:field="*{evidentialNumber}"
+                                   name="evidential_number"/>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,8 @@
                     <label class="col-md-4 control-label">Nadzór</label>
                     <div class="col-md-4">
                         <div th:each="supervision : ${supervisionList}">
-                            <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
+                            <input type="radio" th:id="${supervision}"
+                                   th:value="${supervision.getFieldDescription()}"
                                    th:field="*{supervisionType}" name="supervisionType"/>
                             <label th:text="${supervision}"></label>
                         </div>
@@ -96,7 +97,8 @@
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                            <textarea class="form-control" th:field="*{treatmentType}" name="treatmentType"></textarea>
+                            <textarea class="form-control" th:field="*{treatmentType}"
+                                      name="treatmentType"></textarea>
                         </div>
                     </div>
                 </div>
@@ -110,14 +112,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-warning">Send <span
+                        <button type="submit" class="btn btn-warning">Dodaj <span
                                 class="glyphicon glyphicon-send"></span></button>
                     </div>
                 </div>
 
             </fieldset>
         </form>
-    </div>
-</div><!-- /.container -->
+    </div><!-- /.container -->
+</div>
 </body>
 </html>

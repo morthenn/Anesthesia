@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -34,16 +35,20 @@
                     <li><a href="/patients/list">Patients</a></li>
                     <li><a href="/patients/create">Add Patient</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Signed in as
+                        <span sec:authentication="name"></span></a></li>
+                </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 
-<div layout:fragment="content">
-</div>
+    <div layout:fragment="content">
+    </div>
 
-<footer>
-    <p>Copyright Michal Gubanienkov</p>
-</footer>
+    <footer>
+        <p>Copyright Michal Gubanienkov</p>
+    </footer>
 </div>
 </body>
 </html>
