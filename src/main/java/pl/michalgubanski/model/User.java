@@ -1,14 +1,10 @@
 package pl.michalgubanski.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +12,17 @@ public class User {
 
     private String login;
     private String password;
+    private int role;
 
+    public User(String login, String password, int role) {
+
+        this.setLogin(login);
+        this.setPassword(password);
+        this.setRole(role);
+
+    }
     public User() {
     }
-
     public int getId() {
         return id;
     }
@@ -43,4 +46,24 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + "'" +
+                ", username='" + login + "'" +
+                ", password='" + password + "'" +
+                ", role='" + role + "'" +
+                '}';
+    }
 }
+

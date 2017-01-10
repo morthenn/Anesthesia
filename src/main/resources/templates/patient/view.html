@@ -9,113 +9,23 @@
 
 <div layout:fragment="content">
 
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/patients/list">Patients</a></li>
+        <li class="active" th:text="${patient.evidentialNumber}"></li>
+    </ol>
     <div class="container">
+        <header>
+            <h2 th:text="${patient.evidentialNumber}">title</h2>
+            <h2 th:text="${patient.patientAge}">title</h2>
+        </header>
+        <section th:utext="${patient.supervisionType}"></section>
 
-        <form class="well form-horizontal" th:action="@{/patients/create}" th:object="${patient}" method="post"
-              id="contact_form">
-            <fieldset>
+        <section th:utext="${patient.anesthesiaTechnique}"></section>
 
-                <!-- Form Name -->
-                <legend><h1>Dodaj pacjenta</h1></legend>
+        <section th:utext="${patient.treatmentType}"></section>
 
-                <!--&lt;!&ndash; Data&ndash;&gt;-->
-                <!--<div class="input-group date">-->
-                <!--<input type="text" class="form-control" th:field="*{registeredDate}" name="registeredDate"/><span-->
-                <!--class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>-->
-                <!--</div>-->
-                <!-- Nr ewidencyjny-->
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Nr. ewidencyjny</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                            <input placeholder="numer" class="form-control" type="number" th:field="*{evidentialNumber}"
-                                   name="evidentialNumber" value="${patient.evidentialNumber}"/>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wiek-->
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Wiek</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-hourglass"></i></span>
-                            <input placeholder="wiek" class="form-control" type="number" th:field="*{patientAge}"
-                                   name="patientAge"/>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ASA-->
-                <div class="form-group">
-                    <label class="col-md-4 control-label">ASA</label>
-                    <div class="col-md-4 selectContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                            <select class="form-control selectpicker" th:field="*{asaFactor}" name="asaFactor">
-                                <option th:each="type : ${asaList}" th:value="${type}"
-                                        th:text="${type.getFieldDescription()}" value="Wybierz">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Radio Technika -->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Technika</label>
-                    <div class="col-md-4">
-                        <div th:each="anesthesia : ${anesthesiaList}">
-                            <input type="radio" th:id="${anesthesia}" th:value="${anesthesia.getFieldDescription()}"
-                                   th:field="*{anesthesiaTechnique}" name="anesthesiaTechnique"/>
-                            <label th:text="${anesthesia}"></label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Radio Nadzor -->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Nadzór</label>
-                    <div class="col-md-4">
-                        <div th:each="supervision : ${supervisionList}">
-                            <input type="radio" th:id="${supervision}" th:value="${supervision.getFieldDescription()}"
-                                   th:field="*{supervisionType}" name="supervisionType"/>
-                            <label th:text="${supervision}"></label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text area -->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Rodzaj zabiegu</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                            <textarea class="form-control" th:field="*{treatmentType}" name="treatmentType"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Success message -->
-                <div class="alert alert-success" role="alert" id="success_message">Sukces. <i
-                        class="glyphicon glyphicon-thumbs-up"></i> Pacjent dodany pomyslnie
-                </div>
-
-                <!-- Button -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-warning">Send <span
-                                class="glyphicon glyphicon-send"></span></button>
-                    </div>
-                </div>
-
-            </fieldset>
-        </form>
     </div>
-</div><!-- /.container -->
+</div>
 </body>
 </html>
