@@ -15,8 +15,8 @@ public class UserController {
         return "/security/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginSuccess() {
-        return "redirect:/";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String loginSuccess() {
+//        return "redirect:/";
+//    }
 }
