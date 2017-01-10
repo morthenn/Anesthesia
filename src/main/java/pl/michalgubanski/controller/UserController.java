@@ -9,7 +9,7 @@ public class UserController {
 
     @RequestMapping(value = "security/login")
     public String signup() {
-        return "/security/login";
+        return "security/login";
     }
 
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
