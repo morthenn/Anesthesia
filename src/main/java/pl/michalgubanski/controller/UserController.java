@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "security/login")
     public String signup() {
         return "/security/login";
     }
