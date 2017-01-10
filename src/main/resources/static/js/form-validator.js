@@ -7,7 +7,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            evidentialNumber: {
+            evidential_number: {
             number: {
             validators: {
                   numeric: {
@@ -64,12 +64,13 @@ $(document).ready(function() {
             }
           }
         })
+
         .on('success.form.bv', function(e) {
             $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
                 $('#contact_form').data('bootstrapValidator').resetForm();
 
             // Prevent form submission
-            e.preventDefault();
+             e.preventDefault();
 
             // Get the form instance
             var $form = $(e.target);
@@ -81,6 +82,6 @@ $(document).ready(function() {
             $.post($form.attr('action'), $form.serialize(), function(result) {
                 console.log(result);
             }, 'json');
+
         });
 });
-

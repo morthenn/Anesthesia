@@ -14,17 +14,18 @@
         <li><a href="/patients/list">Patients</a></li>
         <li class="active" th:text="${patient.evidentialNumber}"></li>
     </ol>
-
-    <article>
+    <div class="container">
         <header>
-            <h2 th:text="${patient.supervisionType}">title</h2>
             <h2 th:text="${patient.evidentialNumber}">title</h2>
+            <h2 th:text="${patient.patientAge}">title</h2>
         </header>
-        <section th:utext="${patient.treatmentType}">
-        </section>
-    </article>
+        <section th:utext="${patient.supervisionType}"></section>
 
+        <section th:utext="${patient.anesthesiaTechnique}"></section>
+
+        <section th:utext="${patient.treatmentType}"></section>
+
+    </div>
 </div>
-
 </body>
 </html>

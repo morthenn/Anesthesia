@@ -27,9 +27,6 @@ public class PatientController {
         return "patient/list";
     }
 
-    /**
-     * TODO BUG. It shows only one specific patient, even when changing evNo
-     */
     @RequestMapping(value = "/view/{evidentialNumber}", method = RequestMethod.GET)
     public String patient(@PathVariable(value = "evidentialNumber") Integer evidentialNumber, Model model) {
         model.addAttribute("patient", patientService.getByEvidentialNumber(evidentialNumber));
@@ -55,5 +52,6 @@ public class PatientController {
         log.info("Patient id={} created", patient.getId());
         return "redirect:/patients/list";
     }
+
 
 }

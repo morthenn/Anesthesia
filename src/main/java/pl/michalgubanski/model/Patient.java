@@ -19,6 +19,7 @@ public class Patient {
     private int id;
 
     @NotNull
+    @Min(1)
     private int evidentialNumber;
 
     @NotNull
