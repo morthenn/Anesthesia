@@ -12,7 +12,6 @@ import pl.michalgubanski.model.types.AnesthesiaTechnique;
 import pl.michalgubanski.model.types.AsaFactor;
 import pl.michalgubanski.model.types.SupervisionType;
 import pl.michalgubanski.service.PatientService;
-import pl.michalgubanski.utils.PatientUtil;
 
 @Controller
 @RequestMapping("/patients")
