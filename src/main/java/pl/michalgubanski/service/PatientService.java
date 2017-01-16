@@ -7,9 +7,6 @@ import pl.michalgubanski.repository.PatientRepository;
 
 import java.util.List;
 
-/**
- * Created by U6041021 on 07/11/2016.
- */
 @Service
 public class PatientService {
 
@@ -19,11 +16,17 @@ public class PatientService {
     public List<Patient> listByDate() {
         return patientRepository.findAllByOrderByRegisteredDate();
     }
+
     public List<Patient> listById() {
         return patientRepository.findAllByOrderById();
     }
+
     public List<Patient> listByEvidentialNumber() {
         return patientRepository.findAllByOrderByEvidentialNumberDesc();
+    }
+
+    public Patient getLastPatient() {
+        return patientRepository.findFirstByOrderByEvidentialNumberDesc();
     }
 
     public Patient getByEvidentialNumber(Integer evidentialNumber) {

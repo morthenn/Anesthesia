@@ -7,6 +7,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -19,7 +21,7 @@ public class Patient {
     private int id;
 
     @NotNull
-    @Min(1)
+    @Min(0)
     private int evidentialNumber;
 
     @NotNull
@@ -59,6 +61,11 @@ public class Patient {
 
     public Date getRegisteredDate() {
         return registeredDate;
+    }
+
+    public String getStringDate() {
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(registeredDate);
     }
 
     public String getAsaFactor() {
