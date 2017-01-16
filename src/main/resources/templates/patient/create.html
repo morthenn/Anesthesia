@@ -6,6 +6,10 @@
     <title>Dodawanie pacjenta</title>
     <link href="../../static/css/validator.css" th:href="@{/css/validator.css}" rel="stylesheet"/>
     <script src="../../static/js/form-validator.js" th:src="@{/js/form-validator.js}"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"/>
+    <script src="../../static/js/datepicker.js" th:src="@{/js/datepicker.js}"></script>
 </head>
 <body>
 
@@ -17,22 +21,27 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Dodaj pacjenta do bazy danych</legend>
+                <legend>Dodaj pacjenta do bazy</legend>
 
-                <!--&lt;!&ndash; Data&ndash;&gt;-->
-                <!--<div class="input-group date">-->
-                <!--<input type="text" class="form-control" th:field="*{registeredDate}" name="registeredDate"/><span-->
-                <!--class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>-->
-                <!--</div>-->
+                <!-- Date pick-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Data</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input type="text" class="form-control" th:field="*{registeredDate}"
+                            name="selected_date" id="datepicker"/>
+                        </div>
+                    </div>
+                </div>
                 <!-- Nr ewidencyjny-->
                 <div class="form-group">
                     <label class="col-md-4 control-label">Nr. ewidencyjny</label>
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                            <input placeholder="numer" class="form-control" type="number"
-                                   th:field="*{evidentialNumber}"
-                                   name="evidential_number"/>
+                            <input class="form-control" type="number"
+                                   th:value="${defaultEvNo}" th:name="evidentialNumber" th:id="evidentialNumber"/>
                         </div>
                     </div>
                 </div>
@@ -111,7 +120,7 @@
                 <!-- Button -->
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4 text-center" >
+                    <div class="col-md-4 text-center">
                         <button type="submit" class="btn btn-warning">Dodaj <span
                                 class="glyphicon glyphicon-send"></span></button>
                     </div>

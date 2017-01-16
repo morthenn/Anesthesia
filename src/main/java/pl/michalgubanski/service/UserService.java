@@ -1,10 +1,8 @@
 package pl.michalgubanski.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.michalgubanski.model.User;
 import pl.michalgubanski.repository.UserRepository;
-
 
 public class UserService {
 

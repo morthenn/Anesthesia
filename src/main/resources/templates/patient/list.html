@@ -17,13 +17,13 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>EvidentialNo</th>
-                <th>Age</th>
-                <th>Date</th>
-                <th>Asa</th>
-                <th>Treatment type</th>
-                <th>Anesthesia technique</th>
-                <th>Supervision type</th>
+                <th>Nr. ewid</th>
+                <th>Wiek</th>
+                <th>Data</th>
+                <th>ASA</th>
+                <th>Rodzaj zabiegu</th>
+                <th>Technika</th>
+                <th>Nadzór</th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@
                 <tr style="cursor: pointer" th:onclick="'javascript:rowClicked(\'' + ${patient.evidentialNumber} + '\');'">
                     <td th:text="${patient.evidentialNumber}">s</td>
                     <td th:text="${patient.patientAge}"></td>
-                    <td th:text="${patient.registeredDate}"></td>
+                    <td th:text="${patient.getStringDate()}"></td>
                     <td th:text="${patient.asaFactor}"></td>
                     <td th:text="${patient.treatmentType}"></td>
                     <td th:text="${patient.anesthesiaTechnique}"></td>
